@@ -1,170 +1,185 @@
 //this will replace gets all character data from user input
 import React, { Component } from 'react';
 
-class CharacterData extends React.Component {
+class CharacterData extends Component {
     constructor(props) {
+
         super(props);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        //this.getValues = this.getValues.bind(this);
-        //var averageDamage = 0;
+        this.state = {
+            upgrades: "none",
+            output: 0,
+            damage: 0,
+            elemental: 0,
+            attribute: 0,
+            weaponskill: 0,
+            other: 0,
+            highground: 0,
+            crit: 0
+            // level: 0,
+            // strength: 0,
+            // finesse: 0,
+            // intelligence: 0,
+            // constitution: 0,
+            // memory: 0,
+            // wits: 0
+        }
+        this.handleAverageDamage = this.handleAverageDamage.bind(this);
+        this.getAverageDamage = this.getAverageDamage.bind(this);
+        this.handleNextUpgrades = this.handleNextUpgrades.bind(this);
+        this.getNextUpgrades = this.getNextUpgrades.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
     }
 
+    getAverageDamage() {
+        const { damage, elemental, attribute, weaponskill, other, highground, crit } = this.state;
 
-    handleSubmit(output) {
-        var baseDamage = document.getElementById("damage").value;
-        var elementalBonus = document.getElementById("elemental").value;
-        var attributeBonus = document.getElementById("attribute").value;
-        var weaponSkillBonus = document.getElementById("weapon skill").value;
-        var otherBonus = document.getElementById("other").value;
-        var highgroundBonus = document.getElementById("highground").value;
-        var critMultiplier = document.getElementById("crit").value;
-        var strength = document.getElementById("strength").value;
-        var finesse = document.getElementById("finesse").value;
-        var intelligence = document.getElementById("intelligence").value;
-        var constitution = document.getElementById("constitution").value;
-        var memory = document.getElementById("memory").value;
-        var wits = document.getElementById("wits").value;
-        var dualWeilding = document.getElementById("dualWeilding").value;
-        var ranged = document.getElementById("ranged").value;
-        var singleHanded = document.getElementById("singleHanded").value;
-        var twoHanded = document.getElementById("twoHanded").value;
-        var leadership = document.getElementById("leadership").value;
-        var perserverance = document.getElementById("perserverance").value;
-        var retribution = document.getElementById("retribution").value;
-        var aerotheurge = document.getElementById("aerotheurge").value;
-        var geomancer = document.getElementById("geomancer").value;
-        var huntsman = document.getElementById("huntsman").value;
-        var hydrosophist = document.getElementById("hydrosophist").value;
-        var necromancer = document.getElementById("necromancer").value;
-        var polymorph = document.getElementById("polymorph").value;
-        var pyrokinetic = document.getElementById("pyrokinetic").value;
-        var scoundrel = document.getElementById("scoundrel").value;
-        var summoning = document.getElementById("summoning").value;
-        var warfare = document.getElementById("warfare").value;
+        var averageDamage = Math.floor(damage * (1 + (elemental / 100)) * (1 + (attribute / 100) + (weaponskill / 100) + (other / 100)) * (1 + (highground / 100) + (crit / 100)));
+        //console.log("hello");
+        return averageDamage;
+    }
+    getNextUpgrades() {
+        const { level, strength, finesse, intelligence, constitution, memory, wits, dualWeilding, ranged, singleHanded, twoHanded, leadership, perserverance, retribution, aerotheurge, geomancer, huntsman, hydrosophist, necromancer, polymorph, pyrokinetic, scoundrel, summoning, warfare } = this.state;
+        // figure out next upgrades
+        var y = level * strength;
+        return y;
+        //return next upgrades as string
+    }
 
-        //return an object with all the values in it to be passed to another component for evaluation.
-        //var averageDamage = Math.floor(Number(baseDamage)*(1.0 + (Number(elementalBonus)/100))*(1.0 + (Number(attributeBonus)/100) + (Number(weaponSkillBonus)/100) + (Number(otherBonus)/100))*(1.0 + (Number(highgroundBonus)/100) + (Number(critMultiplier)/100)));
-        //return averageDamage;
-        //console.log('average damage ' + averageDamage);
-        //document.getElementById("output").innerHTML = "Average Damage: " + averageDamage;
-        output.preventDefault();
+    handleNextUpgrades(event) {
+        var nextUpgrades = {};
+        nextUpgrades["upgrades"] = this. getNextUpgrades();
+        this.setState(nextUpgrades);
+        event.preventDefault();
+    }
+
+    handleAverageDamage(event) {
+        var newOutput = {};
+        newOutput["output"] = this.getAverageDamage();
+        this.setState(newOutput);
+        event.preventDefault();
+    }
+
+    handleInputChange(event) {
+        var newVal = {};
+        newVal[event.target.id] = Number(event.target.value);
+        this.setState(newVal);
     }
 
     render() {
-        var i;
-        var array = [];
-        for (i = 1; i <= 50; i++) {
-            array.push(i);
-        }
         return (
             <div id='master'>
                 <div id='damageCalculator'>
                     <h1>Damage Calculator</h1>
-                    <p id="output">Average Damage: </p>
-                    <form onSubmit={this.handleSubmit}>
+                    <p id="output" value={this.state.output}>Average Damage: {this.state.output}</p>
+                    <form onSubmit={this.handleAverageDamage}>
                         <label>
-                            Base Weapon Damage: <input type="number" id="damage" />
+                            Base Weapon Damage: <input type="number" id="damage" value={this.state.damage} onChange={this.handleInputChange} />
                         </label><br />
                         <label>
-                            Elemental Bonus: <input type="number" id="elemental" />%
+                            Elemental Bonus: <input type="number" id="elemental" value={this.state.elemental} onChange={this.handleInputChange} />%
                     </label><br />
                         <label>
-                            Attribute Bonus: <input type="number" id="attribute" />%
+                            Attribute Bonus: <input type="number" id="attribute" value={this.state.attribute} onChange={this.handleInputChange} />%
                     </label><br />
                         <label>
-                            Weapon Skill Bonus: <input type="number" id="weapon skill" />%
+                            Weapon Skill Bonus: <input type="number" id="weaponskill" value={this.state.weaponskill} onChange={this.handleInputChange} />%
                     </label><br />
                         <label>
-                            Other Bonus: <input type="number" id="other" />%
+                            Other Bonus: <input type="number" id="other" value={this.state.other} onChange={this.handleInputChange} />%
                     </label><br />
                         <label>
-                            Highground Bonus: <input type="number" id="highground" />%
+                            Highground Bonus: <input type="number" id="highground" value={this.state.highground} onChange={this.handleInputChange} />%
                     </label><br />
                         <label>
-                            Crit Multiplier: <input type="number" id="crit" />%
+                            Crit Multiplier: <input type="number" id="crit" value={this.state.crit} onChange={this.handleInputChange} />%
                     </label><br />
-
+                        <input type="submit" value="Submit" />
                     </form>
                 </div>
                 <div id='attributes'>
                     <h1>Attributes</h1>
-                    <form onSubmit={this.handleSubmit}>
+                    <p id="upgrades" value={this.state.upgrades}>Next Upgrades: {this.state.upgrades}</p>
+                    <form onSubmit={this.handleNextUpgrades}>
                         <label>
-                            Strength: <input type='number' id='strength' />
+                            Character Level: <input type='number' id='level' value={this.state.level} onChange={this.handleInputChange} />
                         </label><br />
                         <label>
-                            Finesse: <input type='number' id='finesse' />
+                            Strength: <input type='number' id='strength' value={this.state.strength} onChange={this.handleInputChange} />
                         </label><br />
                         <label>
-                            Intelligence: <input type='number' id='intelligence' />
+                            Finesse: <input type='number' id='finesse' value={this.state.finesse} onChange={this.handleInputChange} />
                         </label><br />
                         <label>
-                            Constitution: <input type='number' id='constitution' />
+                            Intelligence: <input type='number' id='intelligence' value={this.state.intelligence} onChange={this.handleInputChange} />
                         </label><br />
                         <label>
-                            Memory: <input type='number' id='memory' />
+                            Constitution: <input type='number' id='constitution' value={this.state.constitution} onChange={this.handleInputChange} />
                         </label><br />
                         <label>
-                            Wits: <input type='number' id='wits' />
+                            Memory: <input type='number' id='memory' value={this.state.memory} onChange={this.handleInputChange} />
                         </label><br />
+                        <label>
+                            Wits: <input type='number' id='wits' value={this.state.wits} onChange={this.handleInputChange} />
+                        </label><br />
+                        {/* <input type="submit" value="Submit" /> */}
                     </form>
                 </div>
                 <div id='abilities'>
                     <h1>Combat Abilities</h1>
-                    <form onSubmit={this.handleSubmit}>
+                    <form onSubmit={this.handleNextUpgrades}>
                         <h2>Weapons</h2>
                         <label>
-                            Dual Weilding: <input type='number' id='dualWeilding' />
+                            Dual Weilding: <input type='number' id='dualWeilding' value={this.state.dualWeilding} onChange={this.handleInputChange} />
                         </label><br />
                         <label>
-                            Ranged: <input type='number' id='ranged' />
+                            Ranged: <input type='number' id='ranged' value={this.state.ranged} onChange={this.handleInputChange} />
                         </label><br />
                         <label>
-                            Single-Handed: <input type='number' id='singleHanded' />
+                            Single-Handed: <input type='number' id='singleHanded' value={this.state.singleHanded} onChange={this.handleInputChange} />
                         </label><br />
                         <label>
-                            Two-Handed: <input type='number' id='twoHanded' />
+                            Two-Handed: <input type='number' id='twoHanded' value={this.state.twoHanded} onChange={this.handleInputChange} />
                         </label><br />
                         <h2>Defence</h2>
                         <label>
-                            Leadership: <input type='number' id='leadership' />
+                            Leadership: <input type='number' id='leadership' value={this.state.leadership} onChange={this.handleInputChange} />
                         </label><br />
                         <label>
-                            Perserverance: <input type='number' id='perserverance' />
+                            Perserverance: <input type='number' id='perserverance' value={this.state.perserverance} onChange={this.handleInputChange} />
                         </label><br />
                         <label>
-                            Retribution: <input type='number' id='retribution' />
+                            Retribution: <input type='number' id='retribution' value={this.state.retribution} onChange={this.handleInputChange} />
                         </label><br />
                         <h2>Skills</h2>
                         <label>
-                            Aerotheurge: <input type='number' id='aerotheurge' />
+                            Aerotheurge: <input type='number' id='aerotheurge' value={this.state.aerotheurge} onChange={this.handleInputChange} />
                         </label><br />
                         <label>
-                            Geomancer: <input type='number' id='geomancer' />
+                            Geomancer: <input type='number' id='geomancer' value={this.state.geomancer} onChange={this.handleInputChange} />
                         </label><br />
                         <label>
-                            Huntsman: <input type='number' id='huntsman' />
+                            Huntsman: <input type='number' id='huntsman' value={this.state.huntsman} onChange={this.handleInputChange} />
                         </label><br />
                         <label>
-                            Hydrosophist: <input type='number' id='hydtosophist' />
+                            Hydrosophist: <input type='number' id='hydtosophist' value={this.state.hydrosophist} onChange={this.handleInputChange} />
                         </label><br />
                         <label>
-                            Necromancer: <input type='number' id='necromancer' />
+                            Necromancer: <input type='number' id='necromancer' value={this.state.necromancer} onChange={this.handleInputChange} />
                         </label><br />
                         <label>
-                            Polymorph: <input type='number' id='polymorph' />
+                            Polymorph: <input type='number' id='polymorph' value={this.state.polymorph} onChange={this.handleInputChange} />
                         </label><br />
                         <label>
-                            Pyrokinetic: <input type='number' id='pyrokinetic' />
+                            Pyrokinetic: <input type='number' id='pyrokinetic' value={this.state.pyrokinetic} onChange={this.handleInputChange} />
                         </label><br />
                         <label>
-                            Scoundrel: <input type='number' id='scoundrel' />
+                            Scoundrel: <input type='number' id='scoundrel' value={this.state.scoundrel} onChange={this.handleInputChange} />
                         </label><br />
                         <label>
-                            Summoning: <input type='number' id='summoning' />
+                            Summoning: <input type='number' id='summoning' value={this.state.summoning} onChange={this.handleInputChange} />
                         </label><br />
                         <label>
-                            Warfare: <input type='number' id='warfare' />
+                            Warfare: <input type='number' id='warfare' value={this.state.warfare} onChange={this.handleInputChange} />
                         </label><br />
                         <input type="submit" value="Submit" />
                     </form>
