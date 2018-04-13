@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
-import FirstChar from './FirstChar';
+import CharacterData from './CharacterData';
 
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <div><FirstChar /></div>
+        <div><CharacterData /></div>
       </div>
       
     );
