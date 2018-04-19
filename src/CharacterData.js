@@ -91,7 +91,10 @@ class CharacterData extends Component {
                 else {
                     for (var i = 0; i <= newState['level'] && Number(i) <= 25; i++) {
                         this.setState({
-                            strength: ((Number(initialState.strength) + 2) + (i*2))//only using half of the attribute points generated...
+                            strength: ((Number(initialState.strength) + 2) + i)//only using half of the attribute points generated...
+                        });
+                        this.setState({
+                            constitution: ((Number(initialState.constitution) + 1) + i)//only using half of the attribute points generated...
                         });
                         if (Number(newState['level']) % 2 == 0) {
                             this.setState({
@@ -134,218 +137,763 @@ class CharacterData extends Component {
                     }
                     //'next level' point dispersal here
                 } break;
-            // case 'metamorph':
-            //     if (newState['level'] === 1) {
-            //         this.setState({
-            //             strength: (Number(initialState.strength) + 2),
-            //             finesse: (Number(initialState.finesse) + 2),
-            //             polymorph: (Number(initialState.polymorph) + 1),
-            //             twoHanded: (Number(initialState.twoHanded) + 1),
-            //             persuasion: (Number(initialState.persuasion) + 1)
-            //         });
-            //     }
-            //     else {
-            //         //'next level' point dispersal here
-            //         this.setState({
-            //             upgrades: "TESTING"
-            //         });
-            //     } break;
-            // case 'ranger':
-            //     if (newState['level'] === 1) {
-            //         this.setState({
-            //             finesse: (Number(initialState.finesse) + 2),
-            //             wits: (Number(initialState.wits) + 1),
-            //             huntsman: (Number(initialState.huntsman) + 1),
-            //             pyrokinetic: (Number(initialState.pyrokinetic) + 1),
-            //             luckyCharm: (Number(initialState.luckyCharm) + 1)
-            //         });
-            //     }
-            //     else {
-            //         //'next level' point dispersal here
-            //         this.setState({
-            //             upgrades: "TESTING"
-            //         });
-            //     } break;
-            // case 'rogue':
-            //     if (newState['level'] === 1) {
-            //         this.setState({
-            //             finesse: (Number(initialState.finesse) + 2),
-            //             constitution: (Number(initialState.constitution) + 1),
-            //             scoundrel: (Number(initialState.scoundrel) + 1),
-            //             sneaking: (Number(initialState.sneaking) + 1),
-            //             dualWeilding: (Number(initialState.dualWeilding) + 1)
-            //         });
-            //     }
-            //     else {
-            //         //'next level' point dispersal here
-            //         this.setState({
-            //             upgrades: "TESTING"
-            //         });
-            //     } break;
-            // case 'shadowblade':
-            //     if (newState['level'] === 1) {
-            //         this.setState({
-            //             finesse: (Number(initialState.finesse) + 2),
-            //             wits: (Number(initialState.wits) + 2),
-            //             scoundrel: (Number(initialState.scoundrel) + 1),
-            //             polymorph: (Number(initialState.polymorph) + 1),
-            //             thievery: (Number(initialState.thievery) + 1)
-            //         });
-            //     }
-            //     else {
-            //         //'next level' point dispersal here
-            //         this.setState({
-            //             upgrades: "TESTING"
-            //         });
-            //     } break;
-            //     case 'wayfarer':
-            //     if (newState['level'] === 1) {
-            //         this.setState({
-            //             finesse: (Number(initialState.finesse) + 2),
-            //             intelligence: (Number(initialState.intelligence) + 1),
-            //             huntsman: (Number(initialState.huntsman) + 1),
-            //             geomancer: (Number(initialState.geomancer) + 1),
-            //             bartering: (Number(initialState.bartering) + 1)
-            //         });
-            //     }
-            //     else {
-            //         //'next level' point dispersal here
-            //         this.setState({
-            //             upgrades: "TESTING"
-            //         });
-            //     } break;
-            //     case 'witch':
-            //     if (newState['level'] === 1) {
-            //         this.setState({
-            //             finesse: (Number(initialState.finesse) + 1),
-            //             intelligence: (Number(initialState.intelligence) + 1),
-            //             constitution: (Number(initialState.constitution) + 1),
-            //             scoundrel: (Number(initialState.scoundrel) + 1),
-            //             necromancer: (Number(initialState.luckyCharm) + 1),
-            //             persuasion: (Number(initialState.persuasion) + 1)
-            //         });
-            //     }
-            //     else {
-            //         //'next level' point dispersal here
-            //         this.setState({
-            //             upgrades: "TESTING"
-            //         });
-            //     } break;
-            //     case 'wizard':
-            //     if (newState['level'] === 1) {
-            //         this.setState({
-            //             intelligence: (Number(initialState.intelligence) + 2),
-            //             constitution: (Number(initialState.constitution) + 1),
-            //             pyrokinetic: (Number(initialState.pyrokinetic) + 1),
-            //             geomancer: (Number(initialState.geomancer) + 1),
-            //             loremaster: (Number(initialState.loremaster) + 1)
-            //         });
-            //     }
-            //     else {
-            //         //'next level' point dispersal here
-            //         this.setState({
-            //             upgrades: "TESTING"
-            //         });
-            //     } break;
-            //     case 'battlemage':
-            //     if (newState['level'] === 1) {
-            //         this.setState({
-            //             strength: (Number(initialState.strength) + 1),
-            //             intelligence: (Number(initialState.intelligence) + 1),
-            //             constitution: (Number(initialState.constitution) + 1),
-            //             warfare: (Number(initialState.warfare) + 1),
-            //             aerotheurge: (Number(initialState.aerotheurge) + 1),
-            //             persuasion: (Number(initialState.persuasion) + 1)
-            //         });
-            //     }
-            //     else {
-            //         //'next level' point dispersal here
-            //         this.setState({
-            //             upgrades: "TESTING"
-            //         });
-            //     } break;
-            //     case 'cleric':
-            //     if (newState['level'] === 1) {
-            //         this.setState({
-            //             strength: (Number(initialState.strength) + 1),
-            //             intelligence: (Number(initialState.intelligence) + 1),
-            //             constitution: (Number(initialState.constitution) + 1),
-            //             hydrosophist: (Number(initialState.hydrosophist) + 1),
-            //             necromancer: (Number(initialState.necromancer) + 1),
-            //             bartering: (Number(initialState.bartering) + 1)
-            //         });
-            //     }
-            //     else {
-            //         //'next level' point dispersal here
-            //         this.setState({
-            //             upgrades: "TESTING"
-            //         });
-            //     } break;
-            //     case 'conjurer':
-            //     if (newState['level'] === 1) {
-            //         this.setState({
-            //             intelligence: (Number(initialState.intelligence) + 1),
-            //             constitution: (Number(initialState.constitution) + 2),
-            //             summoning: (Number(initialState.summoning) + 1),
-            //             leadership: (Number(initialState.leadership) + 1),
-            //             loremaster: (Number(initialState.loremaster) + 1)
-            //         });
-            //     }
-            //     else {
-            //         //'next level' point dispersal here
-            //         this.setState({
-            //             upgrades: "TESTING"
-            //         });
-            //     } break;
-            //     case 'enchanter':
-            //     if (newState['level'] === 1) {
-            //         this.setState({
-            //             intelligence: (Number(initialState.intelligence) + 2),
-            //             constitution: (Number(initialState.constitution) + 1),
-            //             hydrosophist: (Number(initialState.hydrosophist) + 1),
-            //             aerotheurge: (Number(initialState.geomancer) + 1),
-            //             loremaster: (Number(initialState.loremaster) + 1)
-            //         });
-            //     }
-            //     else {
-            //         //'next level' point dispersal here
-            //         this.setState({
-            //             upgrades: "TESTING"
-            //         });
-            //     } break;
-            //     case 'fighter':
-            //     if (newState['level'] === 1) {
-            //         this.setState({
-            //             strength: (Number(initialState.strength) + 1),
-            //             constitution: (Number(initialState.constitution) + 2),
-            //             warfare: (Number(initialState.warfare) + 1),
-            //             geomancer: (Number(initialState.geomancer) + 1),
-            //             bartering: (Number(initialState.bartering) + 1)
-            //         });
-            //     }
-            //     else {
-            //         //'next level' point dispersal here
-            //         this.setState({
-            //             upgrades: "TESTING"
-            //         });
-            //     } break;
-            //     case 'inquisitor':
-            //     if (newState['level'] === 1) {
-            //         this.setState({
-            //             strength: (Number(initialState.strength) + 1),
-            //             intelligence: (Number(initialState.intelligence) + 1),
-            //             constitution: (Number(initialState.constitution) + 1),
-            //             warfare: (Number(initialState.warfare) + 1),
-            //             necromancer: (Number(initialState.necromancer) + 1),
-            //             telekinesis: (Number(initialState.telekinesis) + 1)
-            //         });
-            //     }
-            //     else {
-            //         //'next level' point dispersal here
-            //         this.setState({
-            //             upgrades: "TESTING"
-            //         });
-            //     } break;
+            case 'metamorph':
+                if (newState['level'] === 1) {
+                    this.setState({
+                        strength: (Number(initialState.strength) + 2),
+                        finesse: (Number(initialState.finesse) + 2),
+                        polymorph: (Number(initialState.polymorph) + 1),
+                        twoHanded: (Number(initialState.twoHanded) + 1),
+                        persuasion: (Number(initialState.persuasion) + 1)
+                    });
+                }
+                else {
+                    for (var i = 0; i <= newState['level'] && Number(i) <= 25; i++) {
+                        this.setState({
+                            strength: ((Number(initialState.strength) + 2) + i)//only using half of the attribute points generated...
+                        });
+                        this.setState({
+                            finesse: ((Number(initialState.finesse) + 2) + i)//only using half of the attribute points generated...
+                        });
+                        if (Number(newState['level']) % 2 == 0) {
+                            this.setState({
+                                twoHanded: ((Number(initialState.twoHanded) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }else if (Number(newState['level']) % 2 != 0) {
+                            this.setState({
+                                twoHanded: ((Number(initialState.twoHanded) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }
+                        if (Number(newState['level']) % 2 == 0) {
+                            this.setState({
+                                polymorph: ((Number(initialState.polymorph) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }else if (Number(newState['level']) % 2 != 0) {
+                            this.setState({
+                                polymorph: ((Number(initialState.polymorph) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }
+                        if(Number(newState['level']) % 4 == 0){
+                            this.setState({
+                                persuasion: ((Number(initialState.persuasion) + 1) + (Math.floor(i/4)))
+                            });
+                            
+                        }else if(Number(newState['level']) % 4 != 0){
+                            this.setState({
+                                persuasion: ((Number(initialState.persuasion) + 1) + (Math.floor(i/4)))
+                            });
+                            
+                        }
+                        if ((Number(newState['level'])) > 25){
+                            this.setState({
+                                errors: "Level must be less than or equal to 25"
+                            });
+                        }
+                    }
+                } break;
+            case 'ranger':
+                if (newState['level'] === 1) {
+                    this.setState({
+                        finesse: (Number(initialState.finesse) + 2),
+                        wits: (Number(initialState.wits) + 1),
+                        huntsman: (Number(initialState.huntsman) + 1),
+                        pyrokinetic: (Number(initialState.pyrokinetic) + 1),
+                        luckyCharm: (Number(initialState.luckyCharm) + 1)
+                    });
+                }else {
+                    for (var i = 0; i <= newState['level'] && Number(i) <= 25; i++) {
+                        this.setState({
+                            finesse: ((Number(initialState.finesse) + 2) + i)//only using half of the attribute points generated...
+                        });
+                        this.setState({
+                            wits: ((Number(initialState.wits) + 1) + i)//only using half of the attribute points generated...
+                        });
+                        if (Number(newState['level']) % 2 == 0) {
+                            this.setState({
+                                ranged: ((Number(initialState.ranged) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }else if (Number(newState['level']) % 2 != 0) {
+                            this.setState({
+                                ranged: ((Number(initialState.ranged) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }
+                        if (Number(newState['level']) % 2 == 0) {
+                            this.setState({
+                                pyrokinetic: ((Number(initialState.pyrokinetic) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }else if (Number(newState['level']) % 2 != 0) {
+                            this.setState({
+                                pyrokinetic: ((Number(initialState.pyrokinetic) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }
+                        if(Number(newState['level']) % 4 == 0){
+                            this.setState({
+                                luckyCharm: ((Number(initialState.luckyCharm) + 1) + (Math.floor(i/4)))
+                            });
+                            
+                        }else if(Number(newState['level']) % 4 != 0){
+                            this.setState({
+                                luckyCharm: ((Number(initialState.luckyCharm) + 1) + (Math.floor(i/4)))
+                            });
+                            
+                        }
+                        if ((Number(newState['level'])) > 25){
+                            this.setState({
+                                errors: "Level must be less than or equal to 25"
+                            });
+                        }
+                    }
+                } break;
+            case 'rogue':
+                if (newState['level'] === 1) {
+                    this.setState({
+                        finesse: (Number(initialState.finesse) + 2),
+                        constitution: (Number(initialState.constitution) + 1),
+                        scoundrel: (Number(initialState.scoundrel) + 1),
+                        sneaking: (Number(initialState.sneaking) + 1),
+                        dualWeilding: (Number(initialState.dualWeilding) + 1)
+                    });
+                }
+                else {
+                    for (var i = 0; i <= newState['level'] && Number(i) <= 25; i++) {
+                        this.setState({
+                            finesse: ((Number(initialState.finesse) + 2) + i)//only using half of the attribute points generated...
+                        });
+                        this.setState({
+                            constitution: ((Number(initialState.constitution) + 1) + i)//only using half of the attribute points generated...
+                        });
+                        if (Number(newState['level']) % 2 == 0) {
+                            this.setState({
+                                dualWeilding: ((Number(initialState.dualWeilding) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }else if (Number(newState['level']) % 2 != 0) {
+                            this.setState({
+                                dualWeilding: ((Number(initialState.dualWeilding) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }
+                        if (Number(newState['level']) % 2 == 0) {
+                            this.setState({
+                                scoundrel: ((Number(initialState.scoundrel) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }else if (Number(newState['level']) % 2 != 0) {
+                            this.setState({
+                                scoundrel: ((Number(initialState.scoundrel) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }
+                        if(Number(newState['level']) % 4 == 0){
+                            this.setState({
+                                sneaking: ((Number(initialState.sneaking) + 1) + (Math.floor(i/4)))
+                            });
+                            
+                        }else if(Number(newState['level']) % 4 != 0){
+                            this.setState({
+                                sneaking: ((Number(initialState.sneaking) + 1) + (Math.floor(i/4)))
+                            });
+                            
+                        }
+                        if ((Number(newState['level'])) > 25){
+                            this.setState({
+                                errors: "Level must be less than or equal to 25"
+                            });
+                        }
+                    }
+                } break;
+            case 'shadowblade':
+                if (newState['level'] === 1) {
+                    this.setState({
+                        finesse: (Number(initialState.finesse) + 2),
+                        wits: (Number(initialState.wits) + 2),
+                        scoundrel: (Number(initialState.scoundrel) + 1),
+                        polymorph: (Number(initialState.polymorph) + 1),
+                        thievery: (Number(initialState.thievery) + 1)
+                    });
+                }
+                else {
+                    for (var i = 0; i <= newState['level'] && Number(i) <= 25; i++) {
+                        this.setState({
+                            finesse: ((Number(initialState.finesse) + 2) + i)//only using half of the attribute points generated...
+                        });
+                        this.setState({
+                            wits: ((Number(initialState.wits) + 2) + i)//only using half of the attribute points generated...
+                        });
+                        if (Number(newState['level']) % 2 == 0) {
+                            this.setState({
+                                scoundrel: ((Number(initialState.scoundrel) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }else if (Number(newState['level']) % 2 != 0) {
+                            this.setState({
+                                scoundrel: ((Number(initialState.scoundrel) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }
+                        if (Number(newState['level']) % 2 == 0) {
+                            this.setState({
+                                polymorph: ((Number(initialState.polymorph) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }else if (Number(newState['level']) % 2 != 0) {
+                            this.setState({
+                                polymorph: ((Number(initialState.polymorph) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }
+                        if(Number(newState['level']) % 4 == 0){
+                            this.setState({
+                                thievery: ((Number(initialState.thievery) + 1) + (Math.floor(i/4)))
+                            });
+                            
+                        }else if(Number(newState['level']) % 4 != 0){
+                            this.setState({
+                                thievery: ((Number(initialState.thievery) + 1) + (Math.floor(i/4)))
+                            });
+                            
+                        }
+                        if ((Number(newState['level'])) > 25){
+                            this.setState({
+                                errors: "Level must be less than or equal to 25"
+                            });
+                        }
+                    }
+                } break;
+                case 'wayfarer':
+                if (newState['level'] === 1) {
+                    this.setState({
+                        finesse: (Number(initialState.finesse) + 2),
+                        intelligence: (Number(initialState.intelligence) + 1),
+                        huntsman: (Number(initialState.huntsman) + 1),
+                        geomancer: (Number(initialState.geomancer) + 1),
+                        bartering: (Number(initialState.bartering) + 1)
+                    });
+                }
+                else {
+                    for (var i = 0; i <= newState['level'] && Number(i) <= 25; i++) {
+                        this.setState({
+                            finesse: ((Number(initialState.finesse) + 2) + i)//only using half of the attribute points generated...
+                        });
+                        this.setState({
+                            intelligence: ((Number(initialState.intelligence) + 1) + i)//only using half of the attribute points generated...
+                        });
+                        if (Number(newState['level']) % 2 == 0) {
+                            this.setState({
+                                huntsman: ((Number(initialState.huntsman) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }else if (Number(newState['level']) % 2 != 0) {
+                            this.setState({
+                                huntsman: ((Number(initialState.huntsman) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }
+                        if (Number(newState['level']) % 2 == 0) {
+                            this.setState({
+                                geomancer: ((Number(initialState.geomancer) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }else if (Number(newState['level']) % 2 != 0) {
+                            this.setState({
+                                geomancer: ((Number(initialState.geomancer) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }
+                        if(Number(newState['level']) % 4 == 0){
+                            this.setState({
+                                bartering: ((Number(initialState.bartering) + 1) + (Math.floor(i/4)))
+                            });
+                            
+                        }else if(Number(newState['level']) % 4 != 0){
+                            this.setState({
+                                bartering: ((Number(initialState.bartering) + 1) + (Math.floor(i/4)))
+                            });
+                            
+                        }
+                        if ((Number(newState['level'])) > 25){
+                            this.setState({
+                                errors: "Level must be less than or equal to 25"
+                            });
+                        }
+                    }
+                } break;
+                case 'witch':
+                if (newState['level'] === 1) {
+                    this.setState({
+                        finesse: (Number(initialState.finesse) + 1),
+                        intelligence: (Number(initialState.intelligence) + 1),
+                        constitution: (Number(initialState.constitution) + 1),
+                        scoundrel: (Number(initialState.scoundrel) + 1),
+                        necromancer: (Number(initialState.luckyCharm) + 1),
+                        persuasion: (Number(initialState.persuasion) + 1)
+                    });
+                }
+                else {
+                    for (var i = 0; i <= newState['level'] && Number(i) <= 25; i++) {
+                        this.setState({
+                            finesse: ((Number(initialState.finesse) + 1) + i)//only using half of the attribute points generated...
+                        });
+                        this.setState({
+                            intelligence: ((Number(initialState.intelligence) + 1) + i)//only using half of the attribute points generated...
+                        });
+                        if (Number(newState['level']) % 2 == 0) {
+                            this.setState({
+                                scoundrel: ((Number(initialState.scoundrel) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }else if (Number(newState['level']) % 2 != 0) {
+                            this.setState({
+                                scoundrel: ((Number(initialState.scoundrel) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }
+                        if (Number(newState['level']) % 2 == 0) {
+                            this.setState({
+                                necromancer: ((Number(initialState.necromancer) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }else if (Number(newState['level']) % 2 != 0) {
+                            this.setState({
+                                necromancer: ((Number(initialState.necromancer) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }
+                        if(Number(newState['level']) % 4 == 0){
+                            this.setState({
+                                persuasion: ((Number(initialState.persuasion) + 1) + (Math.floor(i/4)))
+                            });
+                            
+                        }else if(Number(newState['level']) % 4 != 0){
+                            this.setState({
+                                persuasion: ((Number(initialState.persuasion) + 1) + (Math.floor(i/4)))
+                            });
+                            
+                        }
+                        if ((Number(newState['level'])) > 25){
+                            this.setState({
+                                errors: "Level must be less than or equal to 25"
+                            });
+                        }
+                    }
+                } break;
+                case 'wizard':
+                if (newState['level'] === 1) {
+                    this.setState({
+                        intelligence: (Number(initialState.intelligence) + 2),
+                        constitution: (Number(initialState.constitution) + 1),
+                        pyrokinetic: (Number(initialState.pyrokinetic) + 1),
+                        geomancer: (Number(initialState.geomancer) + 1),
+                        loremaster: (Number(initialState.loremaster) + 1)
+                    });
+                }
+                else {
+                    for (var i = 0; i <= newState['level'] && Number(i) <= 25; i++) {
+                        this.setState({
+                            intelligence: ((Number(initialState.intelligence) + 2) + i)//only using half of the attribute points generated...
+                        });
+                        this.setState({
+                            constitution: ((Number(initialState.constitution) + 1) + i)//only using half of the attribute points generated...
+                        });
+                        if (Number(newState['level']) % 2 == 0) {
+                            this.setState({
+                                pyrokinetic: ((Number(initialState.pyrokinetic) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }else if (Number(newState['level']) % 2 != 0) {
+                            this.setState({
+                                pyrokinetic: ((Number(initialState.pyrokinetic) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }
+                        if (Number(newState['level']) % 2 == 0) {
+                            this.setState({
+                                geomancer: ((Number(initialState.geomancer) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }else if (Number(newState['level']) % 2 != 0) {
+                            this.setState({
+                                geomancer: ((Number(initialState.geomancer) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }
+                        if(Number(newState['level']) % 4 == 0){
+                            this.setState({
+                                loremaster: ((Number(initialState.loremaster) + 1) + (Math.floor(i/4)))
+                            });
+                            
+                        }else if(Number(newState['level']) % 4 != 0){
+                            this.setState({
+                                loremaster: ((Number(initialState.loremaster) + 1) + (Math.floor(i/4)))
+                            });
+                            
+                        }
+                        if ((Number(newState['level'])) > 25){
+                            this.setState({
+                                errors: "Level must be less than or equal to 25"
+                            });
+                        }
+                    }
+                } break;
+                case 'battlemage':
+                if (newState['level'] === 1) {
+                    this.setState({
+                        strength: (Number(initialState.strength) + 1),
+                        intelligence: (Number(initialState.intelligence) + 1),
+                        constitution: (Number(initialState.constitution) + 1),
+                        warfare: (Number(initialState.warfare) + 1),
+                        aerotheurge: (Number(initialState.aerotheurge) + 1),
+                        persuasion: (Number(initialState.persuasion) + 1)
+                    });
+                }
+                else {
+                    for (var i = 0; i <= newState['level'] && Number(i) <= 25; i++) {
+                        this.setState({
+                            strength: ((Number(initialState.strength) + 1) + i)//only using half of the attribute points generated...
+                        });
+                        this.setState({
+                            intelligence: ((Number(initialState.intelligence) + 1) + i)//only using half of the attribute points generated...
+                        });
+                        if (Number(newState['level']) % 2 == 0) {
+                            this.setState({
+                                warfare: ((Number(initialState.warfare) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }else if (Number(newState['level']) % 2 != 0) {
+                            this.setState({
+                                warfare: ((Number(initialState.warfare) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }
+                        if (Number(newState['level']) % 2 == 0) {
+                            this.setState({
+                                aerotheurge: ((Number(initialState.aerotheurge) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }else if (Number(newState['level']) % 2 != 0) {
+                            this.setState({
+                                aerotheurge: ((Number(initialState.aerotheurge) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }
+                        if(Number(newState['level']) % 4 == 0){
+                            this.setState({
+                                persuasion: ((Number(initialState.persuasion) + 1) + (Math.floor(i/4)))
+                            });
+                            
+                        }else if(Number(newState['level']) % 4 != 0){
+                            this.setState({
+                                persuasion: ((Number(initialState.persuasion) + 1) + (Math.floor(i/4)))
+                            });
+                            
+                        }
+                        if ((Number(newState['level'])) > 25){
+                            this.setState({
+                                errors: "Level must be less than or equal to 25"
+                            });
+                        }
+                    }
+                } break;
+                case 'cleric':
+                if (newState['level'] === 1) {
+                    this.setState({
+                        strength: (Number(initialState.strength) + 1),
+                        intelligence: (Number(initialState.intelligence) + 1),
+                        constitution: (Number(initialState.constitution) + 1),
+                        hydrosophist: (Number(initialState.hydrosophist) + 1),
+                        necromancer: (Number(initialState.necromancer) + 1),
+                        bartering: (Number(initialState.bartering) + 1)
+                    });
+                }
+                else {
+                    for (var i = 0; i <= newState['level'] && Number(i) <= 25; i++) {
+                        this.setState({
+                            strength: ((Number(initialState.strength) + 1) + i)//only using half of the attribute points generated...
+                        });
+                        this.setState({
+                            intelligence: ((Number(initialState.intelligence) + 1) + i)//only using half of the attribute points generated...
+                        });
+                        if (Number(newState['level']) % 2 == 0) {
+                            this.setState({
+                                hydrosophist: ((Number(initialState.hydrosophist) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }else if (Number(newState['level']) % 2 != 0) {
+                            this.setState({
+                                hydrosophist: ((Number(initialState.hydrosophist) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }
+                        if (Number(newState['level']) % 2 == 0) {
+                            this.setState({
+                                necromancer: ((Number(initialState.necromancer) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }else if (Number(newState['level']) % 2 != 0) {
+                            this.setState({
+                                necromancer: ((Number(initialState.necromancer) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }
+                        if(Number(newState['level']) % 4 == 0){
+                            this.setState({
+                                bartering: ((Number(initialState.bartering) + 1) + (Math.floor(i/4)))
+                            });
+                            
+                        }else if(Number(newState['level']) % 4 != 0){
+                            this.setState({
+                                bartering: ((Number(initialState.bartering) + 1) + (Math.floor(i/4)))
+                            });
+                            
+                        }
+                        if ((Number(newState['level'])) > 25){
+                            this.setState({
+                                errors: "Level must be less than or equal to 25"
+                            });
+                        }
+                    }
+                } break;
+                case 'conjurer':
+                if (newState['level'] === 1) {
+                    this.setState({
+                        intelligence: (Number(initialState.intelligence) + 1),
+                        constitution: (Number(initialState.constitution) + 2),
+                        summoning: (Number(initialState.summoning) + 1),
+                        leadership: (Number(initialState.leadership) + 1),
+                        loremaster: (Number(initialState.loremaster) + 1)
+                    });
+                }
+                else {
+                    for (var i = 0; i <= newState['level'] && Number(i) <= 25; i++) {
+                        this.setState({
+                            intelligence: ((Number(initialState.intelligence) + 2) + i)//only using half of the attribute points generated...
+                        });
+                        this.setState({
+                            constitution: ((Number(initialState.constitution) + 1) + i)//only using half of the attribute points generated...
+                        });
+                        if (Number(newState['level']) % 2 == 0) {
+                            this.setState({
+                                summoning: ((Number(initialState.summoning) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }else if (Number(newState['level']) % 2 != 0) {
+                            this.setState({
+                                summoning: ((Number(initialState.summoning) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }
+                        if (Number(newState['level']) % 2 == 0) {
+                            this.setState({
+                                summoning: ((Number(initialState.summoning) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }else if (Number(newState['level']) % 2 != 0) {
+                            this.setState({
+                                summoning: ((Number(initialState.summoning) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }
+                        if(Number(newState['level']) % 4 == 0){
+                            this.setState({
+                                loremaster: ((Number(initialState.loremaster) + 1) + (Math.floor(i/4)))
+                            });
+                            
+                        }else if(Number(newState['level']) % 4 != 0){
+                            this.setState({
+                                loremaster: ((Number(initialState.loremaster) + 1) + (Math.floor(i/4)))
+                            });
+                            
+                        }
+                        if ((Number(newState['level'])) > 25){
+                            this.setState({
+                                errors: "Level must be less than or equal to 25"
+                            });
+                        }
+                    }
+                } break;
+                case 'enchanter':
+                if (newState['level'] === 1) {
+                    this.setState({
+                        intelligence: (Number(initialState.intelligence) + 2),
+                        constitution: (Number(initialState.constitution) + 1),
+                        hydrosophist: (Number(initialState.hydrosophist) + 1),
+                        aerotheurge: (Number(initialState.geomancer) + 1),
+                        loremaster: (Number(initialState.loremaster) + 1)
+                    });
+                }
+                else {
+                    for (var i = 0; i <= newState['level'] && Number(i) <= 25; i++) {
+                        this.setState({
+                            intelligence: ((Number(initialState.intelligence) + 2) + i)//only using half of the attribute points generated...
+                        });
+                        this.setState({
+                            constitution: ((Number(initialState.constitution) + 1) + i)//only using half of the attribute points generated...
+                        });
+                        if (Number(newState['level']) % 2 == 0) {
+                            this.setState({
+                                hydrosophist: ((Number(initialState.hydrosophist) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }else if (Number(newState['level']) % 2 != 0) {
+                            this.setState({
+                                hydrosophist: ((Number(initialState.hydrosophist) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }
+                        if (Number(newState['level']) % 2 == 0) {
+                            this.setState({
+                                aerotheurge: ((Number(initialState.aerotheurge) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }else if (Number(newState['level']) % 2 != 0) {
+                            this.setState({
+                                aerotheurge: ((Number(initialState.aerotheurge) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }
+                        if(Number(newState['level']) % 4 == 0){
+                            this.setState({
+                                loremaster: ((Number(initialState.loremaster) + 1) + (Math.floor(i/4)))
+                            });
+                            
+                        }else if(Number(newState['level']) % 4 != 0){
+                            this.setState({
+                                loremaster: ((Number(initialState.loremaster) + 1) + (Math.floor(i/4)))
+                            });
+                            
+                        }
+                        if ((Number(newState['level'])) > 25){
+                            this.setState({
+                                errors: "Level must be less than or equal to 25"
+                            });
+                        }
+                    }
+                } break;
+                case 'fighter':
+                if (newState['level'] === 1) {
+                    this.setState({
+                        strength: (Number(initialState.strength) + 1),
+                        constitution: (Number(initialState.constitution) + 2),
+                        warfare: (Number(initialState.warfare) + 1),
+                        geomancer: (Number(initialState.geomancer) + 1),
+                        bartering: (Number(initialState.bartering) + 1)
+                    });
+                }
+                else {
+                    for (var i = 0; i <= newState['level'] && Number(i) <= 25; i++) {
+                        this.setState({
+                            strength: ((Number(initialState.strength) + 1) + i)//only using half of the attribute points generated...
+                        });
+                        this.setState({
+                            constitution: ((Number(initialState.constitution) + 2) + i)//only using half of the attribute points generated...
+                        });
+                        if (Number(newState['level']) % 2 == 0) {
+                            this.setState({
+                                warfare: ((Number(initialState.warfare) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }else if (Number(newState['level']) % 2 != 0) {
+                            this.setState({
+                                warfare: ((Number(initialState.warfare) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }
+                        if (Number(newState['level']) % 2 == 0) {
+                            this.setState({
+                                geomancer: ((Number(initialState.geomancer) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }else if (Number(newState['level']) % 2 != 0) {
+                            this.setState({
+                                geomancer: ((Number(initialState.geomancer) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }
+                        if(Number(newState['level']) % 4 == 0){
+                            this.setState({
+                                bartering: ((Number(initialState.bartering) + 1) + (Math.floor(i/4)))
+                            });
+                            
+                        }else if(Number(newState['level']) % 4 != 0){
+                            this.setState({
+                                bartering: ((Number(initialState.bartering) + 1) + (Math.floor(i/4)))
+                            });
+                            
+                        }
+                        if ((Number(newState['level'])) > 25){
+                            this.setState({
+                                errors: "Level must be less than or equal to 25"
+                            });
+                        }
+                    }
+                } break;
+                case 'inquisitor':
+                if (newState['level'] === 1) {
+                    this.setState({
+                        strength: (Number(initialState.strength) + 1),
+                        intelligence: (Number(initialState.intelligence) + 1),
+                        constitution: (Number(initialState.constitution) + 1),
+                        warfare: (Number(initialState.warfare) + 1),
+                        necromancer: (Number(initialState.necromancer) + 1),
+                        telekinesis: (Number(initialState.telekinesis) + 1)
+                    });
+                }
+                else {
+                    for (var i = 0; i <= newState['level'] && Number(i) <= 25; i++) {
+                        this.setState({
+                            strength: ((Number(initialState.strength) + 1) + i)//only using half of the attribute points generated...
+                        });
+                        this.setState({
+                            intelligence: ((Number(initialState.intelligence) + 1) + i)//only using half of the attribute points generated...
+                        });
+                        if (Number(newState['level']) % 2 == 0) {
+                            this.setState({
+                                warfare: ((Number(initialState.warfare) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }else if (Number(newState['level']) % 2 != 0) {
+                            this.setState({
+                                warfare: ((Number(initialState.warfare) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }
+                        if (Number(newState['level']) % 2 == 0) {
+                            this.setState({
+                                necromancer: ((Number(initialState.necromancer) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }else if (Number(newState['level']) % 2 != 0) {
+                            this.setState({
+                                necromancer: ((Number(initialState.necromancer) + 1) + (Math.floor(i/2)))
+                            });
+                            
+                        }
+                        if(Number(newState['level']) % 4 == 0){
+                            this.setState({
+                                telekinesis: ((Number(initialState.telekinesis) + 1) + (Math.floor(i/4)))
+                            });
+                            
+                        }else if(Number(newState['level']) % 4 != 0){
+                            this.setState({
+                                telekinesis: ((Number(initialState.telekinesis) + 1) + (Math.floor(i/4)))
+                            });
+                            
+                        }
+                        if ((Number(newState['level'])) > 25){
+                            this.setState({
+                                errors: "Level must be less than or equal to 25"
+                            });
+                        }
+                    }
+                } break;
         }
         event.preventDefault();
         this.reset();
