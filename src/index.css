@@ -3,3 +3,125 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.attributes {
+  position: relative;
+  float: right; /* add this */
+  
+  /* margin-left:80px; */
+  top: 8px;
+  height: 3px;
+  width: 90%;
+  background-color: red;
+}
+.combat {
+  position: relative;
+  float: right; /* add this */
+  top: 8px;
+  
+  /* margin-left:80px; */
+  height: 3px;
+  width: 90%;
+  background-color: blue;
+}
+.civil {
+  position: relative;
+  float: right; /* add this */
+  top: 8px;
+  
+  /* margin-left:90px; */
+  height: 3px;
+  width: 90%;
+  background-color: green;
+}
+.attributeDot {
+  position: relative;
+  text-align: center;
+  top: 3px;
+  left: 3px;
+  height: 15px;
+  width: 15px;
+  background-color: orange;
+}
+.combatDot {
+  position: relative;
+  text-align: center;
+  top: 3px;
+  left: 3px;
+  height: 15px;
+  width: 15px;
+  background-color: orange;
+}
+.civilDot {
+  position: relative;
+  text-align: center;
+  top: 3px;
+  left: 3px;
+  height: 15px;
+  width: 15px;
+  background-color: orange;
+}
+#attributeDropZone{
+  position: relative;
+  background-color: rosybrown;
+  top: -9px;
+  width: 21px;
+  height: 21px;
+}
+#combatDropZone{
+  position: relative;
+  background-color: rosybrown;
+  top: -9px;
+  width: 21px;
+  height: 21px;
+}
+#civilDropZone{
+  position: relative;
+  background-color: rosybrown;
+  top: -9px;
+  width: 21px;
+  height: 21px;
+}
+.attributeDot:hover {
+  background-color: rgb(255, 220, 154);
+  cursor: pointer;
+  cursor: hand;
+}
+.combatDot:hover {
+  background-color: rgb(255, 220, 154);
+  cursor: pointer;
+  cursor: hand;
+}
+.civilDot:hover {
+  background-color: rgb(255, 220, 154);
+  cursor: pointer;
+  cursor: hand;
+}
+.attributes > span {
+  width: calc(100% / 25);
+  /* position: absolute; */
+  display: inline-block;
+
+}
+.combat > span {
+  width: calc(100% / 25);
+  /* position: absolute; */
+  display: inline-block;
+
+}
+.civil > span {
+  width: calc(100% / 25);
+  /* position: absolute; */
+  display: inline-block;
+
+}
+#attribute {
+  width: 100%;
+  overflow: hidden; /* add this to contain floated children */
+}
+#label {
+  width: auto;
+  float:left; /* add this */  
+}
+
+

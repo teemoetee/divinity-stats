@@ -1,66 +1,189 @@
 //this will replace gets all character data from user input
 import React, { Component } from 'react';
-let initialState = {
-    errors: "",
-    output: 0,
-    damage: 0,
-    elemental: 0,
-    attribute: 0,
-    weaponskill: 0,
-    other: 0,
-    highground: 0,
-    crit: 0,
-    characterClass: "default",
-    level: 1,
-    strength: 10,
-    finesse: 10,
-    intelligence: 10,
-    constitution: 10,
-    memory: 10,
-    wits: 10,
-    dualWeilding: 0,
-    ranged: 0,
-    singleHanded: 0,
-    twoHanded: 0,
-    leadership: 0,
-    perserverance: 0,
-    retribution: 0,
-    aerotheurge: 0,
-    geomancer: 0,
-    huntsman: 0,
-    hydrosophist: 0,
-    necromancer: 0,
-    polymorph: 0,
-    pyrokinetic: 0,
-    scoundrel: 0,
-    summoning: 0,
-    warfare: 0,
-    bartering: 0,
-    luckyCharm: 0,
-    persuasion: 0,
-    loremaster: 0,
-    telekinesis: 0,
-    sneaking: 0,
-    thievery: 0
+import './index.css';
+
+let initial_loadout = {
+    characterClass: "",
+    strength: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    finesse: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    intelligence: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    constitution: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    memory: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    wits: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+
+    //Combat point distros
+    dualWeilding: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    ranged: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    singleHanded: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    twoHanded: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    leadership: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    perserverance: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    retribution: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    aerotheurge: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    geomancer: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    huntsman: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    hydrosophist: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    necromancer: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    polymorph: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    pyrokinetic: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    scoundrel: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    summoning: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    warfare: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+
+    // civil skill points
+    bartering: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    luckyCharm: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    persuasion: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    loremaster: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    telekinesis: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    sneaking: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    thievery: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 }
+let classes = {
+    knight: {
+        //Attribute point distros
+        strength: [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        constitution: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        //Combat point distros
+        twoHanded: [1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
+        warfare: [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
+        //civil point distros
+        bartering: [1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0]
+    },
+    metamorph: {
+        strength: [2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2],
+        finesse: [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 
+        twoHanded: [1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
+        polymorph: [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
 
+        persuasion: [1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0]
+    },
+    ranger: {
+        finesse: [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        wits: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        //Combat point distros
+        huntsman: [1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
+        pyrokinetic: [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
+        //civil point distros
+        luckyCharm: [1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0]
+    },
+    rogue: {
+        finesse: [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        constitution: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        //Combat point distros
+        dualWeilding: [1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
+        scoundrel: [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
+        //civil point distros
+        sneaking: [1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0]
+    },
+    shadowblade: {
+        finesse: [2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2],
+        wits: [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+
+        scoundrel: [1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
+        polymorph: [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
+
+        thievery: [1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0]
+    },
+    wayfarer: {
+        finesse: [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        intelligence: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        //Combat point distros
+        ranged: [1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
+        geomancer: [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
+        //civil point distros
+        bartering: [1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0]
+    },
+    witch: {
+        finesse: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        intelligence: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        constitution: [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        //Combat point distros
+        scoundrel: [1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
+        necromancer: [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
+        //civil point distros
+        persuasion: [1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0]
+    },
+    wizard: {
+        intelligence: [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        constitution: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        //Combat point distros
+        pyrokinetic: [1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
+        geomancer: [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
+        //civil point distros
+        loremaster: [1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0]
+    },
+    battlemage: {
+        strength: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        intelligence: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        constitution: [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        //Combat point distros
+        warfare: [1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
+        aerotheurge: [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
+        //civil point distros
+        persuasion: [1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0]
+    },
+    cleric: {
+        strength: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        intelligence: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        constitution: [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        //Combat point distros
+        hydrosophist: [1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
+        necromancer: [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
+        //civil point distros
+        bartering: [1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0]
+    },
+    conjurer: {
+        intelligence: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        constitution: [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        //Combat point distros
+        summoning: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        //civil point distros
+        loremaster: [1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0]
+    },
+    enchanter: {
+        intelligence: [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        constitution: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        //Combat point distros
+        hydrosophist: [1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
+        aerotheurge: [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
+        //civil point distros
+        loremaster: [1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0]
+    },
+    fighter: {
+        strength: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        constitution: [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        //Combat point distros
+        warfare: [1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
+        geomancer: [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
+        //civil point distros
+        bartering: [1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0]
+    },
+    inquisitor: {
+        strength: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        intelligence: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        constitution: [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        //Combat point distros
+        warfare: [1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
+        necromancer: [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
+        //civil point distros
+        telekinesis: [1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0]
+    }
+}
 
 class CharacterData extends Component {
     constructor(props) {
-
         super(props);
-        this.state = initialState;
-        this.handleNextUpgrades = this.handleNextUpgrades.bind(this);
+        this.state = initial_loadout;
         this.handleInputChange = this.handleInputChange.bind(this);
         this.changeClass = this.changeClass.bind(this);
-        this.reset = this.reset.bind(this);
-    }
-    reset() {
-        this.setState({ initialState });
-    }
+        this.pointsDistro = this.pointsDistro.bind(this);
+        this.handleChangeAttribute = this.handleChangeAttribute.bind(this);
+        this.handleChangeCombat = this.handleChangeCombat.bind(this);
+        this.handleChangeCivil = this.handleChangeCivil.bind(this);
 
-
+    }
     handleInputChange(event) {
         var newVal = {};
         newVal[event.target.id] = Number(event.target.value);
@@ -73,830 +196,42 @@ class CharacterData extends Component {
         this.setState(newClass);
     }
 
-    handleNextUpgrades(event) {
-        let newState = Object.assign({}, this.state);
-        newState['level'] = this.state.level;
 
-        switch (newState['characterClass']) {
-            case 'knight':
-                if (newState['level'] === 1) {
-                    this.setState({
-                        strength: (Number(initialState.strength) + 2),
-                        constitution: (Number(initialState.constitution) + 1),
-                        warfare: (Number(initialState.warfare) + 1),
-                        twoHanded: (Number(initialState.twoHanded) + 1),
-                        bartering: (Number(initialState.bartering) + 1)
-                    });
-                }
-                else {
-                    for (var i = 0; i <= newState['level'] && Number(i) <= 25; i++) {
-                        this.setState({
-                            strength: ((Number(initialState.strength) + 2) + i)//only using half of the attribute points generated...
-                        });
-                        this.setState({
-                            constitution: ((Number(initialState.constitution) + 1) + i)//only using half of the attribute points generated...
-                        });
-                        if (Number(newState['level']) % 2 == 0) {
-                            this.setState({
-                                twoHanded: ((Number(initialState.twoHanded) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }else if (Number(newState['level']) % 2 != 0) {
-                            this.setState({
-                                twoHanded: ((Number(initialState.twoHanded) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }
-                        if (Number(newState['level']) % 2 == 0) {
-                            this.setState({
-                                warfare: ((Number(initialState.warfare) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }else if (Number(newState['level']) % 2 != 0) {
-                            this.setState({
-                                warfare: ((Number(initialState.warfare) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }
-                        if(Number(newState['level']) % 4 == 0){
-                            this.setState({
-                                bartering: ((Number(initialState.bartering) + 1) + (Math.floor(i/4)))
-                            });
-                            
-                        }else if(Number(newState['level']) % 4 != 0){
-                            this.setState({
-                                bartering: ((Number(initialState.bartering) + 1) + (Math.floor(i/4)))
-                            });
-                            
-                        }
-                        if ((Number(newState['level'])) > 25){
-                            this.setState({
-                                errors: "Level must be less than or equal to 25"
-                            });
-                        }
-                    }
-                    //'next level' point dispersal here
-                } break;
-            case 'metamorph':
-                if (newState['level'] === 1) {
-                    this.setState({
-                        strength: (Number(initialState.strength) + 2),
-                        finesse: (Number(initialState.finesse) + 2),
-                        polymorph: (Number(initialState.polymorph) + 1),
-                        twoHanded: (Number(initialState.twoHanded) + 1),
-                        persuasion: (Number(initialState.persuasion) + 1)
-                    });
-                }
-                else {
-                    for (var i = 0; i <= newState['level'] && Number(i) <= 25; i++) {
-                        this.setState({
-                            strength: ((Number(initialState.strength) + 2) + i)//only using half of the attribute points generated...
-                        });
-                        this.setState({
-                            finesse: ((Number(initialState.finesse) + 2) + i)//only using half of the attribute points generated...
-                        });
-                        if (Number(newState['level']) % 2 == 0) {
-                            this.setState({
-                                twoHanded: ((Number(initialState.twoHanded) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }else if (Number(newState['level']) % 2 != 0) {
-                            this.setState({
-                                twoHanded: ((Number(initialState.twoHanded) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }
-                        if (Number(newState['level']) % 2 == 0) {
-                            this.setState({
-                                polymorph: ((Number(initialState.polymorph) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }else if (Number(newState['level']) % 2 != 0) {
-                            this.setState({
-                                polymorph: ((Number(initialState.polymorph) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }
-                        if(Number(newState['level']) % 4 == 0){
-                            this.setState({
-                                persuasion: ((Number(initialState.persuasion) + 1) + (Math.floor(i/4)))
-                            });
-                            
-                        }else if(Number(newState['level']) % 4 != 0){
-                            this.setState({
-                                persuasion: ((Number(initialState.persuasion) + 1) + (Math.floor(i/4)))
-                            });
-                            
-                        }
-                        if ((Number(newState['level'])) > 25){
-                            this.setState({
-                                errors: "Level must be less than or equal to 25"
-                            });
-                        }
-                    }
-                } break;
-            case 'ranger':
-                if (newState['level'] === 1) {
-                    this.setState({
-                        finesse: (Number(initialState.finesse) + 2),
-                        wits: (Number(initialState.wits) + 1),
-                        huntsman: (Number(initialState.huntsman) + 1),
-                        pyrokinetic: (Number(initialState.pyrokinetic) + 1),
-                        luckyCharm: (Number(initialState.luckyCharm) + 1)
-                    });
-                }else {
-                    for (var i = 0; i <= newState['level'] && Number(i) <= 25; i++) {
-                        this.setState({
-                            finesse: ((Number(initialState.finesse) + 2) + i)//only using half of the attribute points generated...
-                        });
-                        this.setState({
-                            wits: ((Number(initialState.wits) + 1) + i)//only using half of the attribute points generated...
-                        });
-                        if (Number(newState['level']) % 2 == 0) {
-                            this.setState({
-                                ranged: ((Number(initialState.ranged) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }else if (Number(newState['level']) % 2 != 0) {
-                            this.setState({
-                                ranged: ((Number(initialState.ranged) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }
-                        if (Number(newState['level']) % 2 == 0) {
-                            this.setState({
-                                pyrokinetic: ((Number(initialState.pyrokinetic) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }else if (Number(newState['level']) % 2 != 0) {
-                            this.setState({
-                                pyrokinetic: ((Number(initialState.pyrokinetic) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }
-                        if(Number(newState['level']) % 4 == 0){
-                            this.setState({
-                                luckyCharm: ((Number(initialState.luckyCharm) + 1) + (Math.floor(i/4)))
-                            });
-                            
-                        }else if(Number(newState['level']) % 4 != 0){
-                            this.setState({
-                                luckyCharm: ((Number(initialState.luckyCharm) + 1) + (Math.floor(i/4)))
-                            });
-                            
-                        }
-                        if ((Number(newState['level'])) > 25){
-                            this.setState({
-                                errors: "Level must be less than or equal to 25"
-                            });
-                        }
-                    }
-                } break;
-            case 'rogue':
-                if (newState['level'] === 1) {
-                    this.setState({
-                        finesse: (Number(initialState.finesse) + 2),
-                        constitution: (Number(initialState.constitution) + 1),
-                        scoundrel: (Number(initialState.scoundrel) + 1),
-                        sneaking: (Number(initialState.sneaking) + 1),
-                        dualWeilding: (Number(initialState.dualWeilding) + 1)
-                    });
-                }
-                else {
-                    for (var i = 0; i <= newState['level'] && Number(i) <= 25; i++) {
-                        this.setState({
-                            finesse: ((Number(initialState.finesse) + 2) + i)//only using half of the attribute points generated...
-                        });
-                        this.setState({
-                            constitution: ((Number(initialState.constitution) + 1) + i)//only using half of the attribute points generated...
-                        });
-                        if (Number(newState['level']) % 2 == 0) {
-                            this.setState({
-                                dualWeilding: ((Number(initialState.dualWeilding) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }else if (Number(newState['level']) % 2 != 0) {
-                            this.setState({
-                                dualWeilding: ((Number(initialState.dualWeilding) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }
-                        if (Number(newState['level']) % 2 == 0) {
-                            this.setState({
-                                scoundrel: ((Number(initialState.scoundrel) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }else if (Number(newState['level']) % 2 != 0) {
-                            this.setState({
-                                scoundrel: ((Number(initialState.scoundrel) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }
-                        if(Number(newState['level']) % 4 == 0){
-                            this.setState({
-                                sneaking: ((Number(initialState.sneaking) + 1) + (Math.floor(i/4)))
-                            });
-                            
-                        }else if(Number(newState['level']) % 4 != 0){
-                            this.setState({
-                                sneaking: ((Number(initialState.sneaking) + 1) + (Math.floor(i/4)))
-                            });
-                            
-                        }
-                        if ((Number(newState['level'])) > 25){
-                            this.setState({
-                                errors: "Level must be less than or equal to 25"
-                            });
-                        }
-                    }
-                } break;
-            case 'shadowblade':
-                if (newState['level'] === 1) {
-                    this.setState({
-                        finesse: (Number(initialState.finesse) + 2),
-                        wits: (Number(initialState.wits) + 2),
-                        scoundrel: (Number(initialState.scoundrel) + 1),
-                        polymorph: (Number(initialState.polymorph) + 1),
-                        thievery: (Number(initialState.thievery) + 1)
-                    });
-                }
-                else {
-                    for (var i = 0; i <= newState['level'] && Number(i) <= 25; i++) {
-                        this.setState({
-                            finesse: ((Number(initialState.finesse) + 2) + i)//only using half of the attribute points generated...
-                        });
-                        this.setState({
-                            wits: ((Number(initialState.wits) + 2) + i)//only using half of the attribute points generated...
-                        });
-                        if (Number(newState['level']) % 2 == 0) {
-                            this.setState({
-                                scoundrel: ((Number(initialState.scoundrel) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }else if (Number(newState['level']) % 2 != 0) {
-                            this.setState({
-                                scoundrel: ((Number(initialState.scoundrel) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }
-                        if (Number(newState['level']) % 2 == 0) {
-                            this.setState({
-                                polymorph: ((Number(initialState.polymorph) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }else if (Number(newState['level']) % 2 != 0) {
-                            this.setState({
-                                polymorph: ((Number(initialState.polymorph) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }
-                        if(Number(newState['level']) % 4 == 0){
-                            this.setState({
-                                thievery: ((Number(initialState.thievery) + 1) + (Math.floor(i/4)))
-                            });
-                            
-                        }else if(Number(newState['level']) % 4 != 0){
-                            this.setState({
-                                thievery: ((Number(initialState.thievery) + 1) + (Math.floor(i/4)))
-                            });
-                            
-                        }
-                        if ((Number(newState['level'])) > 25){
-                            this.setState({
-                                errors: "Level must be less than or equal to 25"
-                            });
-                        }
-                    }
-                } break;
-                case 'wayfarer':
-                if (newState['level'] === 1) {
-                    this.setState({
-                        finesse: (Number(initialState.finesse) + 2),
-                        intelligence: (Number(initialState.intelligence) + 1),
-                        huntsman: (Number(initialState.huntsman) + 1),
-                        geomancer: (Number(initialState.geomancer) + 1),
-                        bartering: (Number(initialState.bartering) + 1)
-                    });
-                }
-                else {
-                    for (var i = 0; i <= newState['level'] && Number(i) <= 25; i++) {
-                        this.setState({
-                            finesse: ((Number(initialState.finesse) + 2) + i)//only using half of the attribute points generated...
-                        });
-                        this.setState({
-                            intelligence: ((Number(initialState.intelligence) + 1) + i)//only using half of the attribute points generated...
-                        });
-                        if (Number(newState['level']) % 2 == 0) {
-                            this.setState({
-                                huntsman: ((Number(initialState.huntsman) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }else if (Number(newState['level']) % 2 != 0) {
-                            this.setState({
-                                huntsman: ((Number(initialState.huntsman) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }
-                        if (Number(newState['level']) % 2 == 0) {
-                            this.setState({
-                                geomancer: ((Number(initialState.geomancer) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }else if (Number(newState['level']) % 2 != 0) {
-                            this.setState({
-                                geomancer: ((Number(initialState.geomancer) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }
-                        if(Number(newState['level']) % 4 == 0){
-                            this.setState({
-                                bartering: ((Number(initialState.bartering) + 1) + (Math.floor(i/4)))
-                            });
-                            
-                        }else if(Number(newState['level']) % 4 != 0){
-                            this.setState({
-                                bartering: ((Number(initialState.bartering) + 1) + (Math.floor(i/4)))
-                            });
-                            
-                        }
-                        if ((Number(newState['level'])) > 25){
-                            this.setState({
-                                errors: "Level must be less than or equal to 25"
-                            });
-                        }
-                    }
-                } break;
-                case 'witch':
-                if (newState['level'] === 1) {
-                    this.setState({
-                        finesse: (Number(initialState.finesse) + 1),
-                        intelligence: (Number(initialState.intelligence) + 1),
-                        constitution: (Number(initialState.constitution) + 1),
-                        scoundrel: (Number(initialState.scoundrel) + 1),
-                        necromancer: (Number(initialState.luckyCharm) + 1),
-                        persuasion: (Number(initialState.persuasion) + 1)
-                    });
-                }
-                else {
-                    for (var i = 0; i <= newState['level'] && Number(i) <= 25; i++) {
-                        this.setState({
-                            finesse: ((Number(initialState.finesse) + 1) + i)//only using half of the attribute points generated...
-                        });
-                        this.setState({
-                            intelligence: ((Number(initialState.intelligence) + 1) + i)//only using half of the attribute points generated...
-                        });
-                        if (Number(newState['level']) % 2 == 0) {
-                            this.setState({
-                                scoundrel: ((Number(initialState.scoundrel) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }else if (Number(newState['level']) % 2 != 0) {
-                            this.setState({
-                                scoundrel: ((Number(initialState.scoundrel) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }
-                        if (Number(newState['level']) % 2 == 0) {
-                            this.setState({
-                                necromancer: ((Number(initialState.necromancer) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }else if (Number(newState['level']) % 2 != 0) {
-                            this.setState({
-                                necromancer: ((Number(initialState.necromancer) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }
-                        if(Number(newState['level']) % 4 == 0){
-                            this.setState({
-                                persuasion: ((Number(initialState.persuasion) + 1) + (Math.floor(i/4)))
-                            });
-                            
-                        }else if(Number(newState['level']) % 4 != 0){
-                            this.setState({
-                                persuasion: ((Number(initialState.persuasion) + 1) + (Math.floor(i/4)))
-                            });
-                            
-                        }
-                        if ((Number(newState['level'])) > 25){
-                            this.setState({
-                                errors: "Level must be less than or equal to 25"
-                            });
-                        }
-                    }
-                } break;
-                case 'wizard':
-                if (newState['level'] === 1) {
-                    this.setState({
-                        intelligence: (Number(initialState.intelligence) + 2),
-                        constitution: (Number(initialState.constitution) + 1),
-                        pyrokinetic: (Number(initialState.pyrokinetic) + 1),
-                        geomancer: (Number(initialState.geomancer) + 1),
-                        loremaster: (Number(initialState.loremaster) + 1)
-                    });
-                }
-                else {
-                    for (var i = 0; i <= newState['level'] && Number(i) <= 25; i++) {
-                        this.setState({
-                            intelligence: ((Number(initialState.intelligence) + 2) + i)//only using half of the attribute points generated...
-                        });
-                        this.setState({
-                            constitution: ((Number(initialState.constitution) + 1) + i)//only using half of the attribute points generated...
-                        });
-                        if (Number(newState['level']) % 2 == 0) {
-                            this.setState({
-                                pyrokinetic: ((Number(initialState.pyrokinetic) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }else if (Number(newState['level']) % 2 != 0) {
-                            this.setState({
-                                pyrokinetic: ((Number(initialState.pyrokinetic) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }
-                        if (Number(newState['level']) % 2 == 0) {
-                            this.setState({
-                                geomancer: ((Number(initialState.geomancer) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }else if (Number(newState['level']) % 2 != 0) {
-                            this.setState({
-                                geomancer: ((Number(initialState.geomancer) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }
-                        if(Number(newState['level']) % 4 == 0){
-                            this.setState({
-                                loremaster: ((Number(initialState.loremaster) + 1) + (Math.floor(i/4)))
-                            });
-                            
-                        }else if(Number(newState['level']) % 4 != 0){
-                            this.setState({
-                                loremaster: ((Number(initialState.loremaster) + 1) + (Math.floor(i/4)))
-                            });
-                            
-                        }
-                        if ((Number(newState['level'])) > 25){
-                            this.setState({
-                                errors: "Level must be less than or equal to 25"
-                            });
-                        }
-                    }
-                } break;
-                case 'battlemage':
-                if (newState['level'] === 1) {
-                    this.setState({
-                        strength: (Number(initialState.strength) + 1),
-                        intelligence: (Number(initialState.intelligence) + 1),
-                        constitution: (Number(initialState.constitution) + 1),
-                        warfare: (Number(initialState.warfare) + 1),
-                        aerotheurge: (Number(initialState.aerotheurge) + 1),
-                        persuasion: (Number(initialState.persuasion) + 1)
-                    });
-                }
-                else {
-                    for (var i = 0; i <= newState['level'] && Number(i) <= 25; i++) {
-                        this.setState({
-                            strength: ((Number(initialState.strength) + 1) + i)//only using half of the attribute points generated...
-                        });
-                        this.setState({
-                            intelligence: ((Number(initialState.intelligence) + 1) + i)//only using half of the attribute points generated...
-                        });
-                        if (Number(newState['level']) % 2 == 0) {
-                            this.setState({
-                                warfare: ((Number(initialState.warfare) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }else if (Number(newState['level']) % 2 != 0) {
-                            this.setState({
-                                warfare: ((Number(initialState.warfare) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }
-                        if (Number(newState['level']) % 2 == 0) {
-                            this.setState({
-                                aerotheurge: ((Number(initialState.aerotheurge) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }else if (Number(newState['level']) % 2 != 0) {
-                            this.setState({
-                                aerotheurge: ((Number(initialState.aerotheurge) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }
-                        if(Number(newState['level']) % 4 == 0){
-                            this.setState({
-                                persuasion: ((Number(initialState.persuasion) + 1) + (Math.floor(i/4)))
-                            });
-                            
-                        }else if(Number(newState['level']) % 4 != 0){
-                            this.setState({
-                                persuasion: ((Number(initialState.persuasion) + 1) + (Math.floor(i/4)))
-                            });
-                            
-                        }
-                        if ((Number(newState['level'])) > 25){
-                            this.setState({
-                                errors: "Level must be less than or equal to 25"
-                            });
-                        }
-                    }
-                } break;
-                case 'cleric':
-                if (newState['level'] === 1) {
-                    this.setState({
-                        strength: (Number(initialState.strength) + 1),
-                        intelligence: (Number(initialState.intelligence) + 1),
-                        constitution: (Number(initialState.constitution) + 1),
-                        hydrosophist: (Number(initialState.hydrosophist) + 1),
-                        necromancer: (Number(initialState.necromancer) + 1),
-                        bartering: (Number(initialState.bartering) + 1)
-                    });
-                }
-                else {
-                    for (var i = 0; i <= newState['level'] && Number(i) <= 25; i++) {
-                        this.setState({
-                            strength: ((Number(initialState.strength) + 1) + i)//only using half of the attribute points generated...
-                        });
-                        this.setState({
-                            intelligence: ((Number(initialState.intelligence) + 1) + i)//only using half of the attribute points generated...
-                        });
-                        if (Number(newState['level']) % 2 == 0) {
-                            this.setState({
-                                hydrosophist: ((Number(initialState.hydrosophist) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }else if (Number(newState['level']) % 2 != 0) {
-                            this.setState({
-                                hydrosophist: ((Number(initialState.hydrosophist) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }
-                        if (Number(newState['level']) % 2 == 0) {
-                            this.setState({
-                                necromancer: ((Number(initialState.necromancer) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }else if (Number(newState['level']) % 2 != 0) {
-                            this.setState({
-                                necromancer: ((Number(initialState.necromancer) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }
-                        if(Number(newState['level']) % 4 == 0){
-                            this.setState({
-                                bartering: ((Number(initialState.bartering) + 1) + (Math.floor(i/4)))
-                            });
-                            
-                        }else if(Number(newState['level']) % 4 != 0){
-                            this.setState({
-                                bartering: ((Number(initialState.bartering) + 1) + (Math.floor(i/4)))
-                            });
-                            
-                        }
-                        if ((Number(newState['level'])) > 25){
-                            this.setState({
-                                errors: "Level must be less than or equal to 25"
-                            });
-                        }
-                    }
-                } break;
-                case 'conjurer':
-                if (newState['level'] === 1) {
-                    this.setState({
-                        intelligence: (Number(initialState.intelligence) + 1),
-                        constitution: (Number(initialState.constitution) + 2),
-                        summoning: (Number(initialState.summoning) + 1),
-                        leadership: (Number(initialState.leadership) + 1),
-                        loremaster: (Number(initialState.loremaster) + 1)
-                    });
-                }
-                else {
-                    for (var i = 0; i <= newState['level'] && Number(i) <= 25; i++) {
-                        this.setState({
-                            intelligence: ((Number(initialState.intelligence) + 2) + i)//only using half of the attribute points generated...
-                        });
-                        this.setState({
-                            constitution: ((Number(initialState.constitution) + 1) + i)//only using half of the attribute points generated...
-                        });
-                        if (Number(newState['level']) % 2 == 0) {
-                            this.setState({
-                                summoning: ((Number(initialState.summoning) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }else if (Number(newState['level']) % 2 != 0) {
-                            this.setState({
-                                summoning: ((Number(initialState.summoning) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }
-                        if (Number(newState['level']) % 2 == 0) {
-                            this.setState({
-                                summoning: ((Number(initialState.summoning) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }else if (Number(newState['level']) % 2 != 0) {
-                            this.setState({
-                                summoning: ((Number(initialState.summoning) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }
-                        if(Number(newState['level']) % 4 == 0){
-                            this.setState({
-                                loremaster: ((Number(initialState.loremaster) + 1) + (Math.floor(i/4)))
-                            });
-                            
-                        }else if(Number(newState['level']) % 4 != 0){
-                            this.setState({
-                                loremaster: ((Number(initialState.loremaster) + 1) + (Math.floor(i/4)))
-                            });
-                            
-                        }
-                        if ((Number(newState['level'])) > 25){
-                            this.setState({
-                                errors: "Level must be less than or equal to 25"
-                            });
-                        }
-                    }
-                } break;
-                case 'enchanter':
-                if (newState['level'] === 1) {
-                    this.setState({
-                        intelligence: (Number(initialState.intelligence) + 2),
-                        constitution: (Number(initialState.constitution) + 1),
-                        hydrosophist: (Number(initialState.hydrosophist) + 1),
-                        aerotheurge: (Number(initialState.geomancer) + 1),
-                        loremaster: (Number(initialState.loremaster) + 1)
-                    });
-                }
-                else {
-                    for (var i = 0; i <= newState['level'] && Number(i) <= 25; i++) {
-                        this.setState({
-                            intelligence: ((Number(initialState.intelligence) + 2) + i)//only using half of the attribute points generated...
-                        });
-                        this.setState({
-                            constitution: ((Number(initialState.constitution) + 1) + i)//only using half of the attribute points generated...
-                        });
-                        if (Number(newState['level']) % 2 == 0) {
-                            this.setState({
-                                hydrosophist: ((Number(initialState.hydrosophist) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }else if (Number(newState['level']) % 2 != 0) {
-                            this.setState({
-                                hydrosophist: ((Number(initialState.hydrosophist) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }
-                        if (Number(newState['level']) % 2 == 0) {
-                            this.setState({
-                                aerotheurge: ((Number(initialState.aerotheurge) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }else if (Number(newState['level']) % 2 != 0) {
-                            this.setState({
-                                aerotheurge: ((Number(initialState.aerotheurge) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }
-                        if(Number(newState['level']) % 4 == 0){
-                            this.setState({
-                                loremaster: ((Number(initialState.loremaster) + 1) + (Math.floor(i/4)))
-                            });
-                            
-                        }else if(Number(newState['level']) % 4 != 0){
-                            this.setState({
-                                loremaster: ((Number(initialState.loremaster) + 1) + (Math.floor(i/4)))
-                            });
-                            
-                        }
-                        if ((Number(newState['level'])) > 25){
-                            this.setState({
-                                errors: "Level must be less than or equal to 25"
-                            });
-                        }
-                    }
-                } break;
-                case 'fighter':
-                if (newState['level'] === 1) {
-                    this.setState({
-                        strength: (Number(initialState.strength) + 1),
-                        constitution: (Number(initialState.constitution) + 2),
-                        warfare: (Number(initialState.warfare) + 1),
-                        geomancer: (Number(initialState.geomancer) + 1),
-                        bartering: (Number(initialState.bartering) + 1)
-                    });
-                }
-                else {
-                    for (var i = 0; i <= newState['level'] && Number(i) <= 25; i++) {
-                        this.setState({
-                            strength: ((Number(initialState.strength) + 1) + i)//only using half of the attribute points generated...
-                        });
-                        this.setState({
-                            constitution: ((Number(initialState.constitution) + 2) + i)//only using half of the attribute points generated...
-                        });
-                        if (Number(newState['level']) % 2 == 0) {
-                            this.setState({
-                                warfare: ((Number(initialState.warfare) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }else if (Number(newState['level']) % 2 != 0) {
-                            this.setState({
-                                warfare: ((Number(initialState.warfare) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }
-                        if (Number(newState['level']) % 2 == 0) {
-                            this.setState({
-                                geomancer: ((Number(initialState.geomancer) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }else if (Number(newState['level']) % 2 != 0) {
-                            this.setState({
-                                geomancer: ((Number(initialState.geomancer) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }
-                        if(Number(newState['level']) % 4 == 0){
-                            this.setState({
-                                bartering: ((Number(initialState.bartering) + 1) + (Math.floor(i/4)))
-                            });
-                            
-                        }else if(Number(newState['level']) % 4 != 0){
-                            this.setState({
-                                bartering: ((Number(initialState.bartering) + 1) + (Math.floor(i/4)))
-                            });
-                            
-                        }
-                        if ((Number(newState['level'])) > 25){
-                            this.setState({
-                                errors: "Level must be less than or equal to 25"
-                            });
-                        }
-                    }
-                } break;
-                case 'inquisitor':
-                if (newState['level'] === 1) {
-                    this.setState({
-                        strength: (Number(initialState.strength) + 1),
-                        intelligence: (Number(initialState.intelligence) + 1),
-                        constitution: (Number(initialState.constitution) + 1),
-                        warfare: (Number(initialState.warfare) + 1),
-                        necromancer: (Number(initialState.necromancer) + 1),
-                        telekinesis: (Number(initialState.telekinesis) + 1)
-                    });
-                }
-                else {
-                    for (var i = 0; i <= newState['level'] && Number(i) <= 25; i++) {
-                        this.setState({
-                            strength: ((Number(initialState.strength) + 1) + i)//only using half of the attribute points generated...
-                        });
-                        this.setState({
-                            intelligence: ((Number(initialState.intelligence) + 1) + i)//only using half of the attribute points generated...
-                        });
-                        if (Number(newState['level']) % 2 == 0) {
-                            this.setState({
-                                warfare: ((Number(initialState.warfare) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }else if (Number(newState['level']) % 2 != 0) {
-                            this.setState({
-                                warfare: ((Number(initialState.warfare) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }
-                        if (Number(newState['level']) % 2 == 0) {
-                            this.setState({
-                                necromancer: ((Number(initialState.necromancer) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }else if (Number(newState['level']) % 2 != 0) {
-                            this.setState({
-                                necromancer: ((Number(initialState.necromancer) + 1) + (Math.floor(i/2)))
-                            });
-                            
-                        }
-                        if(Number(newState['level']) % 4 == 0){
-                            this.setState({
-                                telekinesis: ((Number(initialState.telekinesis) + 1) + (Math.floor(i/4)))
-                            });
-                            
-                        }else if(Number(newState['level']) % 4 != 0){
-                            this.setState({
-                                telekinesis: ((Number(initialState.telekinesis) + 1) + (Math.floor(i/4)))
-                            });
-                            
-                        }
-                        if ((Number(newState['level'])) > 25){
-                            this.setState({
-                                errors: "Level must be less than or equal to 25"
-                            });
-                        }
-                    }
-                } break;
-        }
-        event.preventDefault();
-        this.reset();
+    handleChangeAttribute(event) {
+        //logic for changing points from one attribure array to another. This is the 'onClick' behavior. Must return default case for failed point moves eg. clicking outside of the accepted point socpe.
+        // var dataIndex = event.target.getAttribute('data-index');
+        // var dataAttribute = event.target.getAttribute('data-attribute');
+        // var base = this.state[dataAttribute];
+        // //logic for adding to that index
+        // function plus() {base[dataIndex] += 1}
+        // plus();
+        // //logic for subtracting from that index
+        // // function minus() {base[dataIndex] -= 1}
+        // // minus();
+
+        // let currentState = {...this.state.currentState, [dataAttribute]: base};
+        // // console.log(currentState);
+        // this.setState(currentState);
+
+
+
+    }
+
+    handleChangeCombat(event) {
+        //logic for changing points from one combat array to another. This is the 'onClick' behavior. Must return default case for failed point moves eg. clicking outside of the accepted point socpe.
+        console.log('Combat Index: ' + event.target.getAttribute('data-index'));
+
+    }
+
+    handleChangeCivil(event) {
+        //logic for changing points from one civil array to another. This is the 'onClick' behavior. Must return default case for failed point moves eg. clicking outside of the accepted point socpe.
+        console.log('Civil Index: ' + event.target.getAttribute('data-index'));
+    }
+
+    pointsDistro() {
+        let initialState = Object.assign({}, this.state);
+        let classObj = Object.assign({}, classes)
+        this.setState(classObj[initialState['characterClass']]);
     }
 
     render() {
@@ -905,6 +240,7 @@ class CharacterData extends Component {
                 <div id='attributes'>
                     <div id='build'>
                         <br />
+                        <h2>Character Class & Level</h2>
                         <label>Character Class: </label>
                         <select onChange={this.changeClass} id="characterClass">
                             <option value="null">Select Class...</option>
@@ -922,65 +258,199 @@ class CharacterData extends Component {
                             <option value="enchanter">Enchanter</option>
                             <option value="fighter">Fighter</option>
                             <option value="inquisitor">Inquisitor</option>
-                        </select><br />
-                        <label>Character Level: <input type='number' id='level' value={this.state.level} onChange={this.handleInputChange} onSubmit={this.handleNextUpgrades} /></label><br /><br />
-                        <p id="errors" value={this.state.errors}> {this.state.errors}</p>
-                    </div>
-                    <div id="attributePoints">
-                        <h2>Attributes</h2>
-                        
-                        <form onSubmit={this.handleNextUpgrades}>
-                            <label>Strength: <input type='number' id='strength' value={this.state.strength} onChange={this.handleInputChange} readOnly /></label><br />
-                            <label>Finesse: <input type='number' id='finesse' value={this.state.finesse} onChange={this.handleInputChange} readOnly /></label><br />
-                            <label>Intelligence: <input type='number' id='intelligence' value={this.state.intelligence} onChange={this.handleInputChange} readOnly /></label><br />
-                            <label>Constitution: <input type='number' id='constitution' value={this.state.constitution} onChange={this.handleInputChange} readOnly /></label><br />
-                            <label>Memory: <input type='number' id='memory' value={this.state.memory} onChange={this.handleInputChange} readOnly /></label><br />
-                            <label>Wits: <input type='number' id='wits' value={this.state.wits} onChange={this.handleInputChange} readOnly /></label><br />
-                        </form>
-                    </div>
-                    <div id='combatPoints'>
-                        <h2>Combat Abilities</h2>
-                        <form onSubmit={this.handleNextUpgrades}>
-                            <h3>Weapons</h3>
-                            <label>Dual Weilding: <input type='number' id='dualWeilding' value={this.state.dualWeilding} onChange={this.handleInputChange} readOnly /></label><br />
-                            <label>Ranged: <input type='number' id='ranged' value={this.state.ranged} onChange={this.handleInputChange} readOnly /></label><br />
-                            <label>Single-Handed: <input type='number' id='singleHanded' value={this.state.singleHanded} onChange={this.handleInputChange} readOnly /></label><br />
-                            <label>Two-Handed: <input type='number' id='twoHanded' value={this.state.twoHanded} onChange={this.handleInputChange} readOnly /></label><br />
-                            <h3>Defence</h3>
-                            <label>Leadership: <input type='number' id='leadership' value={this.state.leadership} onChange={this.handleInputChange} readOnly /></label><br />
-                            <label>Perserverance: <input type='number' id='perserverance' value={this.state.perserverance} onChange={this.handleInputChange} readOnly /></label><br />
-                            <label>Retribution: <input type='number' id='retribution' value={this.state.retribution} onChange={this.handleInputChange} readOnly /></label><br />
-                            <h3>Skills</h3>
-                            <label>Aerotheurge: <input type='number' id='aerotheurge' value={this.state.aerotheurge} onChange={this.handleInputChange} readOnly /></label><br />
-                            <label>Geomancer: <input type='number' id='geomancer' value={this.state.geomancer} onChange={this.handleInputChange} readOnly /></label><br />
-                            <label>Huntsman: <input type='number' id='huntsman' value={this.state.huntsman} onChange={this.handleInputChange} readOnly /></label><br />
-                            <label>Hydrosophist: <input type='number' id='hydtosophist' value={this.state.hydrosophist} onChange={this.handleInputChange} readOnly /></label><br />
-                            <label>Necromancer: <input type='number' id='necromancer' value={this.state.necromancer} onChange={this.handleInputChange} readOnly /></label><br />
-                            <label>Polymorph: <input type='number' id='polymorph' value={this.state.polymorph} onChange={this.handleInputChange} readOnly /></label><br />
-                            <label>Pyrokinetic: <input type='number' id='pyrokinetic' value={this.state.pyrokinetic} onChange={this.handleInputChange} readOnly /></label><br />
-                            <label>Scoundrel: <input type='number' id='scoundrel' value={this.state.scoundrel} onChange={this.handleInputChange} readOnly /></label><br />
-                            <label>Summoning: <input type='number' id='summoning' value={this.state.summoning} onChange={this.handleInputChange} readOnly /></label><br />
-                            <label>Warfare: <input type='number' id='warfare' value={this.state.warfare} onChange={this.handleInputChange} readOnly /></label><br />
-                        </form>
-                    </div>
-                    <div id="civilPoints">
-                        <h2>Civil Abilities</h2>
-                        <form onSubmit={this.handleNextUpgrades}>
-                            <h3>Personality</h3>
-                            <label>Bartering: <input type='number' id='bartering' value={this.state.bartering} onChange={this.handleInputChange} readOnly /></label><br />
-                            <label>Lucky Charm: <input type='number' id='luckyCharm' value={this.state.luckyCharm} onChange={this.handleInputChange} readOnly /></label><br />
-                            <label>Persuasion: <input type='number' id='persuasion' value={this.state.persuasion} onChange={this.handleInputChange} readOnly /></label><br />
-                            <h3>Craftsmanship</h3>
-                            <label>Loremaster: <input type='number' id='loremaster' value={this.state.loremaster} onChange={this.handleInputChange} readOnly /></label><br />
-                            <label>Telekinesis: <input type='number' id='telekinesis' value={this.state.telekinesis} onChange={this.handleInputChange} readOnly /></label><br />
-                            <h3>Nasty Deeds</h3>
-                            <label>Sneaking: <input type='number' id='sneaking' value={this.state.sneaking} onChange={this.handleInputChange} readOnly /></label><br />
-                            <label>Thievery: <input type='number' id='thievery' value={this.state.thievery} onChange={this.handleInputChange} readOnly /></label><br />
-                            <input type="submit" value="Submit" />
-                        </form>
+                        </select>
+                        <input type="submit" value="Submit" onClick={this.pointsDistro} />
+                        <hr />
+                        <div id='attributes'>
+                            <div id='label'>Strength: </div>
+                            <div className='attributes' id='strength' >
+                                {this.state.strength.map((value, index) => {
+                                    return <span ><div id='attributeDropZone'><div className='attributeDot' data-index={index} data-attribute='strength'>{value}</div></div></span>                    })}
+                            </div><br /><br />
+                            <div id='label'>Finesse: </div>
+                            <div className='attributes' id='finesse' >
+                                {this.state.finesse.map((value, index) => {
+                                    return <span><div id='attributeDropZone'><div className='attributeDot' data-index={index} data-attribute='finesse' onClick={this.handleChangeAttribute}>{value}</div></div></span>
+                                })}
+                            </div><br /><br />
+                            <div id='label'>Intelligence: </div>
+                            <div className='attributes' id='intelligence' >
+                                {this.state.intelligence.map((value, index) => {
+                                    return <span><div id='attributeDropZone'><div className='attributeDot' data-index={index} data-attribute='intelligence' onClick={this.handleChangeAttribute}>{value}</div></div></span>
+                                })}
+                            </div><br /><br />
+                            <div id='label'>Constitution: </div>
+                            <div className='attributes' id='constitution' >
+                                {this.state.constitution.map((value, index) => {
+                                    return <span><div id='attributeDropZone'><div className='attributeDot' data-index={index} data-attribute='constitution' onClick={this.handleChangeAttribute}>{value}</div></div></span>
+                                })}
+                            </div><br /><br />
+                            <div id='label'>Memory: </div>
+                            <div className='attributes' id='memory' >
+                                {this.state.memory.map((value, index) => {
+                                    return <span><div id='attributeDropZone'><div className='attributeDot' data-index={index} data-attribute='memory' onClick={this.handleChangeAttribute}>{value}</div></div></span>
+                                })}
+                            </div><br /><br />
+                            <div id='label'>Wits: </div>
+                            <div className='attributes' id='wits' >
+                                {this.state.wits.map((value, index) => {
+                                    return <span><div id='attributeDropZone'><div className='attributeDot' data-index={index} data-attribute='wits' onClick={this.handleChangeAttribute}>{value}</div></div></span>
+                                })}
+                            </div><br /><br />
+                            <hr />
+                        </div>
+                        <div id='combat'>
+                            <div id='label'>Dual Weilding: </div>
+                            <div className='combat' id='dualWeilding' >
+                                {this.state.dualWeilding.map((value, index) => {
+                                    return <span><div id='combatDropZone'><div className='combatDot' data-index={index} onClick={this.handleChangeCombat}>{value}</div></div></span>
+                                })}
+                            </div><br /><br />
+                            <div id='label'>Ranged: </div>
+                            <div className='combat' id='ranged' >
+                                {this.state.ranged.map((value, index) => {
+                                    return <span><div id='combatDropZone'><div className='combatDot' data-index={index} onClick={this.handleChangeCombat}>{value}</div></div></span>
+                                })}
+                            </div><br /><br />
+                            <div id='label'>Single Handed: </div>
+                            <div className='combat' id='singleHanded' >
+                                {this.state.singleHanded.map((value, index) => {
+                                    return <span><div id='combatDropZone'><div className='combatDot' data-index={index} onClick={this.handleChangeCombat}>{value}</div></div></span>
+                                })}
+                            </div><br /><br />
+                            <div id='label'>Two Handed: </div>
+                            <div className='combat' id='twoHanded' >
+                                {this.state.twoHanded.map((value, index) => {
+                                    return <span><div id='combatDropZone'><div className='combatDot' data-index={index} onClick={this.handleChangeCombat}>{value}</div></div></span>
+                                })}
+                            </div><br /><br />
+                            <div id='label'>Leadership: </div>
+                            <div className='combat' id='leadership' >
+                                {this.state.leadership.map((value, index) => {
+                                    return <span><div id='combatDropZone'><div className='combatDot' data-index={index} onClick={this.handleChangeCombat}>{value}</div></div></span>
+                                })}
+                            </div><br /><br />
+                            <div id='label'>Perserverance: </div>
+                            <div className='combat' id='perserverance' >
+                                {this.state.perserverance.map((value, index) => {
+                                    return <span><div id='combatDropZone'><div className='combatDot' data-index={index} onClick={this.handleChangeCombat}>{value}</div></div></span>
+                                })}
+                            </div><br /><br />
+                            <div id='label'>Retribution: </div>
+                            <div className='combat' id='retribution' >
+                                {this.state.retribution.map((value, index) => {
+                                    return <span><div id='combatDropZone'><div className='combatDot' data-index={index} onClick={this.handleChangeCombat}>{value}</div></div></span>
+                                })}
+                            </div><br /><br />
+                            <div id='label'>Aerotheurge: </div>
+                            <div className='combat' id='aerotheurge' >
+                                {this.state.aerotheurge.map((value, index) => {
+                                    return <span><div id='combatDropZone'><div className='combatDot' data-index={index} onClick={this.handleChangeCombat}>{value}</div></div></span>
+                                })}
+                            </div><br /><br />
+                            <div id='label'>Geomancer: </div>
+                            <div className='combat' id='geomancer' >
+                                {this.state.geomancer.map((value, index) => {
+                                    return <span><div id='combatDropZone'><div className='combatDot' data-index={index} onClick={this.handleChangeCombat}>{value}</div></div></span>
+                                })}
+                            </div><br /><br />
+                            <div id='label'>Huntsman: </div>
+                            <div className='combat' id='huntsman' >
+                                {this.state.huntsman.map((value, index) => {
+                                    return <span><div id='combatDropZone'><div className='combatDot' data-index={index} onClick={this.handleChangeCombat}>{value}</div></div></span>
+                                })}
+                            </div><br /><br />
+                            <div id='label'>Hydrosophist: </div>
+                            <div className='combat' id='hydrosophist' >
+                                {this.state.hydrosophist.map((value, index) => {
+                                    return <span><div id='combatDropZone'><div className='combatDot' data-index={index} onClick={this.handleChangeCombat}>{value}</div></div></span>
+                                })}
+                            </div><br /><br />
+                            <div id='label'>Necromancer: </div>
+                            <div className='combat' id='necromancer' >
+                                {this.state.necromancer.map((value, index) => {
+                                    return <span><div id='combatDropZone'><div className='combatDot' data-index={index} onClick={this.handleChangeCombat}>{value}</div></div></span>
+                                })}
+                            </div><br /><br />
+                            <div id='label'>Polymorph: </div>
+                            <div className='combat' id='polymorph' >
+                                {this.state.polymorph.map((value, index) => {
+                                    return <span><div id='combatDropZone'><div className='combatDot' data-index={index} onClick={this.handleChangeCombat}>{value}</div></div></span>
+                                })}
+                            </div><br /><br />
+                            <div id='label'>Pyrokinetic: </div>
+                            <div className='combat' id='pyrokinetic' >
+                                {this.state.pyrokinetic.map((value, index) => {
+                                    return <span><div id='combatDropZone'><div className='combatDot' data-index={index} onClick={this.handleChangeCombat}>{value}</div></div></span>
+                                })}
+                            </div><br /><br />
+                            <div id='label'>Scoundrel: </div>
+                            <div className='combat' id='scoundrel' >
+                                {this.state.scoundrel.map((value, index) => {
+                                    return <span><div id='combatDropZone'><div className='combatDot' data-index={index} onClick={this.handleChangeCombat}>{value}</div></div></span>
+                                })}
+                            </div><br /><br />
+                            <div id='label'>Summoning: </div>
+                            <div className='combat' id='summoning' >
+                                {this.state.summoning.map((value, index) => {
+                                    return <span><div id='combatDropZone'><div className='combatDot' data-index={index} onClick={this.handleChangeCombat}>{value}</div></div></span>
+                                })}
+                            </div><br /><br />
+                            <div id='label'>Warfare: </div>
+                            <div className='combat' id='warfare' >
+                                {this.state.warfare.map((value, index) => {
+                                    return <span><div id='combatDropZone'><div className='combatDot' data-index={index} onClick={this.handleChangeCombat}>{value}</div></div></span>
+                                })}
+                            </div><br /><br /><hr />
+                        </div>
+                        <div id='civil'>
+                            <div id='label'>Bartering: </div>
+                            <div className='civil' id='bartering' >
+                                {this.state.bartering.map((value, index) => {
+                                    return <span><div id='combatDropZone'><div className='civilDot' data-index={index} onClick={this.handleChangeCivil}>{value}</div></div></span>
+                                })}
+                            </div><br /><br />
+                            <div id='label'>Lucky Charm: </div>
+                            <div className='civil' id='luckyCharm' >
+                                {this.state.luckyCharm.map((value, index) => {
+                                    return <span><div id='combatDropZone'><div className='civilDot' data-index={index} onClick={this.handleChangeCivil}>{value}</div></div></span>
+                                })}
+                            </div><br /><br />
+                            <div id='label'>Persuasion: </div>
+                            <div className='civil' id='persuasion' >
+                                {this.state.persuasion.map((value, index) => {
+                                    return <span><div id='combatDropZone'><div className='civilDot' data-index={index} onClick={this.handleChangeCivil}>{value}</div></div></span>
+                                })}
+                            </div><br /><br />
+                            <div id='label'>Loremaster: </div>
+                            <div className='civil' id='loremaster' >
+                                {this.state.loremaster.map((value, index) => {
+                                    return <span><div id='combatDropZone'><div className='civilDot' data-index={index} onClick={this.handleChangeCivil}>{value}</div></div></span>
+                                })}
+                            </div><br /><br />
+                            <div id='label'>Telekinesis: </div>
+                            <div className='civil' id='telekinesis' >
+                                {this.state.telekinesis.map((value, index) => {
+                                    return <span><div id='combatDropZone'><div className='civilDot' data-index={index} onClick={this.handleChangeCivil}>{value}</div></div></span>
+                                })}
+                            </div><br /><br />
+                            <div id='label'>Sneaking: </div>
+                            <div className='civil' id='sneaking' >
+                                {this.state.sneaking.map((value, index) => {
+                                    return <span><div id='combatDropZone'><div className='civilDot' data-index={index} onClick={this.handleChangeCivil}>{value}</div></div></span>
+                                })}
+                            </div><br /><br />
+                            <div id='label'>Thievery: </div>
+                            <div className='civil' id='thievery' >
+                                {this.state.thievery.map((value, index) => {
+                                    return <span><div id='combatDropZone'><div className='civilDot' data-index={index} onClick={this.handleChangeCivil}>{value}</div></div></span>
+                                })}
+                            </div><br /><br />
+                        </div>
                     </div>
                 </div>
             </div>
+
         );
     }
 
