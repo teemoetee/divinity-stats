@@ -12,7 +12,7 @@ body {
   top: 8px;
   height: 3px;
   width: 90%;
-  background-color: red;
+  /* background-color: red; */
 }
 .combat {
   position: relative;
@@ -22,7 +22,7 @@ body {
   /* margin-left:80px; */
   height: 3px;
   width: 90%;
-  background-color: blue;
+  /* background-color: blue; */
 }
 .civil {
   position: relative;
@@ -32,7 +32,7 @@ body {
   /* margin-left:90px; */
   height: 3px;
   width: 90%;
-  background-color: green;
+  /* background-color: green; */
 }
 .attributeDot {
   position: relative;
@@ -63,24 +63,39 @@ body {
 }
 #attributeDropZone{
   position: relative;
-  background-color: rosybrown;
+  background-color: rgba(255, 55, 55, 0.397);
   top: -9px;
   width: 21px;
   height: 21px;
 }
 #combatDropZone{
   position: relative;
-  background-color: rosybrown;
+  background-color: rgba(83, 83, 255, 0.397);
   top: -9px;
   width: 21px;
   height: 21px;
 }
 #civilDropZone{
   position: relative;
-  background-color: rosybrown;
+  background-color: rgba(11, 78, 11, 0.397);
   top: -9px;
   width: 21px;
   height: 21px;
+}
+#attributeDropZone:hover{
+  background-color: rgb(12, 107, 0);
+  cursor: pointer;
+  cursor: hand;
+}
+#combatDropZone:hover{
+  background-color: rgb(12, 107, 0);
+  cursor: pointer;
+  cursor: hand;
+}
+#civilDropZone:hover{
+  background-color: rgb(12, 107, 0);
+  cursor: pointer;
+  cursor: hand;
 }
 .attributeDot:hover {
   background-color: rgb(255, 220, 154);
@@ -97,19 +112,19 @@ body {
   cursor: pointer;
   cursor: hand;
 }
-.attributes > span {
+.attributes > div {
   width: calc(100% / 25);
   /* position: absolute; */
   display: inline-block;
 
 }
-.combat > span {
+.combat > div {
   width: calc(100% / 25);
   /* position: absolute; */
   display: inline-block;
 
 }
-.civil > span {
+.civil > div {
   width: calc(100% / 25);
   /* position: absolute; */
   display: inline-block;
