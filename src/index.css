@@ -3,7 +3,16 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
-
+.levels {
+  position: relative;
+  float: right; /* add this */
+  
+  /* margin-left:80px; */
+  top: 8px;
+  height: 3px;
+  width: 90%;
+  /* background-color: red; */
+}
 .attributes {
   position: relative;
   float: right; /* add this */
@@ -14,6 +23,7 @@ body {
   width: 90%;
   /* background-color: red; */
 }
+
 .combat {
   position: relative;
   float: right; /* add this */
@@ -34,13 +44,22 @@ body {
   width: 90%;
   /* background-color: green; */
 }
+.levelsDot {
+  position: relative;
+  text-align: center;
+  top: 3px;
+  left: 3px;
+  height: 17px;
+  width: 17px;
+  background-color: lightgrey;
+}
 .attributeDot {
   position: relative;
   text-align: center;
   top: 3px;
   left: 3px;
-  height: 15px;
-  width: 15px;
+  height: 17px;
+  width: 17px;
   background-color: orange;
 }
 .combatDot {
@@ -48,8 +67,8 @@ body {
   text-align: center;
   top: 3px;
   left: 3px;
-  height: 15px;
-  width: 15px;
+  height: 17px;
+  width: 17px;
   background-color: orange;
 }
 .civilDot {
@@ -57,30 +76,37 @@ body {
   text-align: center;
   top: 3px;
   left: 3px;
-  height: 15px;
-  width: 15px;
+  height: 17px;
+  width: 17px;
   background-color: orange;
+}
+#levelsOuter{
+  position: relative;
+  background-color: gray;
+  top: -9px;
+  width: 23px;
+  height: 23px;
 }
 #attributeDropZone{
   position: relative;
   background-color: rgba(255, 55, 55, 0.397);
   top: -9px;
-  width: 21px;
-  height: 21px;
+  width: 23px;
+  height: 23px;
 }
 #combatDropZone{
   position: relative;
   background-color: rgba(83, 83, 255, 0.397);
   top: -9px;
-  width: 21px;
-  height: 21px;
+  width: 23px;
+  height: 23px;
 }
 #civilDropZone{
   position: relative;
   background-color: rgba(11, 78, 11, 0.397);
   top: -9px;
-  width: 21px;
-  height: 21px;
+  width: 23px;
+  height: 23px;
 }
 #attributeDropZone:hover{
   background-color: rgb(12, 107, 0);
@@ -111,6 +137,12 @@ body {
   background-color: rgb(255, 220, 154);
   cursor: pointer;
   cursor: hand;
+}
+.levels > div {
+  width: calc(100% / 25);
+  /* position: absolute; */
+  display: inline-block;
+
 }
 .attributes > div {
   width: calc(100% / 25);
