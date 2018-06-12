@@ -210,8 +210,20 @@ class CharacterData extends Component {
     }
 
     allowDrop(allowdropevent) {
-        allowdropevent.preventDefault();
         var id = allowdropevent.currentTarget.getAttribute('id');
+        var pointType = allowdropevent.target.getAttribute('className');
+        if (id === 'attributeDropZone' && pointType === 'attributeDot') {
+            allowdropevent.preventDefault();
+            console.log('can drop attribute');
+        }else if (id === 'combatDropZone' && pointType === 'combatDot') {
+            allowdropevent.preventDefault();
+            console.log('can drop combat');
+        }else if (id === 'civilDropZone' && pointType === 'civilDot') {
+            allowdropevent.preventDefault();
+            console.log('can drop civil');
+        }else {
+            console.log('cannot drop');
+        }
     }
 
     drop(dropevent) {
