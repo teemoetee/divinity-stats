@@ -1,0 +1,68 @@
+IF ANY GEAR IS ADDING TO THE ATTRIBUTES/ABILITIES, PLEASE INCLUDE THE POINTS FOR CALCULATION.
+
+ATTRIBUTES (buffs per +1 point)
+------------------
+Strength (strength based weapons)
++5% damage
+Finesse (finesse based weapons)
++5% damage
+Intelligence (intelligence based weapons)
++5% damage
+Constitution (vitality)
++7% vitality
+Memory (memory slots)
++1 memory slot
+Wits (critical chance)
++1% critical chance
+
+COMBAT ABILITIES (buffs per +1 point)
+--------------------------
+=WEAPONS
+Dual Wielding (two one-handed weapons)
++5% damage
++1% dodging
+Ranged (bows and crossbows)
++5% damage
++1% critical chance
+Single-Handed (one-handed weapon + shield or empty off-hand)
++5% damage
++5% accuracy
+Two-Handed (one two-handed weapon)
++5% damage
++5% critical multiplier
+
+=DEFENCE
+Leadership
++2% dodging
++3% all resistances
+Perserverance
++5% armor restored
+Retribution
++5% damage reflected
+
+=SKILLS
+Aerotheurge
++5% air damage
+Geomancer
++5% earth and poison damage
+Huntsman
++5% damage from high ground
+Hydrosophist
++5% water damage
++5% vitality restored
++5% magic armor from skills and potions
+Necromancer
++10% heal for damage dealt
+Polymorph
++1 free attribute point
+Pyrokinetic
++5% fire damage
+Scoundrel
++5% critical multiplier
+Summoning
++5% physical/magic damage for summons
++5% vitality for summons
++5% physical armor for summons
++5% magic armor for summons
+Warfare
++5% physical damage
